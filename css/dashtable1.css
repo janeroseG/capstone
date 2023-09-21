@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.boxes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+  .boxes .box {
+    flex-basis: calc(14.2857% - 20px);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    padding: 10px 10px;
+    background-color: var(--box1-color);
+    transition: var(--tran-05);
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 10px;
+  }
+  .boxes .box:hover .number {
+    transform: scale(1.2); /* Increase size on hover */
+  }
+  .boxes .box i {
+    font-size: 35px;
+    color: var(--text-color);
+    padding: 20px; 
+    padding-left: 20px;
+    padding-right: 20px;
+    
+  }
+  
+  .boxes .box .text {
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  .boxes .box .number {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+  }
+  .boxes .box.box1 {
+    background: linear-gradient(135deg, #00a8a8, #4DA3FF);
+    background-size: 150% 150%; /* Adjust the size as per your preference */
+    
+  }
+  
+  .boxes .box.box2 {
+    background: linear-gradient(135deg, #FFE6AC, #FFB800);
+    background-size: 200% 200%; /* Adjust the size as per your preference */
+   
+  }
+  
+  .boxes .box.box3 {
+    background: linear-gradient(135deg, #E7D1FC, #BB6BD9);
+    background-size: 200% 200%; /* Adjust the size as per your preference */
+  }
+  
+  .boxes .box.box4 {
+    background: linear-gradient(135deg, #FF9A9E, #FF5E5E);
+    background-size: 200% 200%; /* Adjust the size as per your preference */
+  }
+  
+  .boxes .box.box5 {
+    background: linear-gradient(135deg, #B0FEFA, #35A3AB);
+    background-size: 200% 200%; /* Adjust the size as per your preference */
+  }
+  
+  .boxes .box.box6 {
+    background: linear-gradient(135deg, #FFF3C0, #FFB649);
+    background-size: 200% 200%; /* Adjust the size as per your preference */
+  }
+  
+  .boxes .box.box7 {
+    background: linear-gradient(135deg, #E2A3C7, #9B70A4);
+    background-size: 200% 200%; /* Adjust the size as per your preference */
+  }
+  .boxes .box:hover {
+    animation: gradientAnimation 3s ease infinite; /* Add animation on hover */
+  }
+  
+  @media (max-width: 400px) {
+    .boxes .box {
+      flex-basis: calc(50% - 20px);
+      margin-bottom: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .boxes .box {
+      flex-basis: 100%;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /*For the table */
+  table {
+    border-collapse: collapse;
+    height: 300px;
+    padding-inline-start: 40px;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  .container {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    padding-left:10px;
+  }
+  .activesen{
+    width: 100px;
+  }

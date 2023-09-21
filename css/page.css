@@ -1,0 +1,22 @@
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination a,
+.pagination .current-page {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #f2f2f2;
+    color: #333;
+    text-decoration: none;
+}
+
+.pagination .current-page {
+    background-color: #0384fc;
+    color: #fff;
+}

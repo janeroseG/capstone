@@ -1,0 +1,46 @@
+.table-container {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color:  #d2e7d6; /* Green color */
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color:#b8d8be; /* Green color */
+  font-weight: bold;
+}
+
+td {
+  border-bottom: 1px solid #d3cbcb; /* Changed to gray color */
+}
+
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a, .pagination .current-page {
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #98d7a5; /* Updated to green color */
+  margin-right: 5px;
+}
+
+.pagination .current-page {
+  background-color: #c1f3d4; /* Updated to green color */
+}
+
+.pagination a:hover {
+  background-color: #98d7a5; /* Updated to green color */
+}
