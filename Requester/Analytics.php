@@ -36,10 +36,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT COUNT(*) AS total FROM  sensordatas";
+$sql = "SELECT COUNT(*) AS total FROM sensordata";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$sql = "SELECT id, location, temperature, humidity, temperature1, humidity1, reading_time , tempCelsius,pHvalue, conductivity FROM  sensordatas ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+$sql = "SELECT id, location, temperature, humidity, temperature1, humidity1, reading_time , tempCelsius,pHvalue, conductivity FROM  sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
 //Variables
 $dataPoints = array();
 $dataPoints2 = array();

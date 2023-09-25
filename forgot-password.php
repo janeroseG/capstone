@@ -74,9 +74,8 @@ if (isset($_SESSION['rEmail'])) {
     
     <link href="//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!--/Style-CSS -->
-    <link rel="stylesheet" href="../css/styh11.css" type="text/css" media="all" />
-    <!--//Style-CSS -->
+     <!--/Style-CSS -->
+     <link rel="stylesheet" href="css/styh11.css" type="text/css" media="all" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
@@ -89,26 +88,31 @@ if (isset($_SESSION['rEmail'])) {
     <section class="w3l-mockup-form">
         <div class="container">
             <!-- /form -->
-            <div class="workinghny-form-grid">
+            
+            <div class="workinghny-form-grid" >
                 <div class="main-mockup">
-                <div class="w3l_form align-self" style="background-image: url('../images/3a.png');">  
+                    <div class="w3l_form align-self" style="background-image: url('images/5a.png');"></div>
+                         <div class="content-wthree">
+                             <h2>Forgot Password</h2>
+                                <?php echo $msg; ?>
+                                 <form action="" method="post">
+                                 <input type="email" class="email" name="rEmail" placeholder="Enter Your Email" required>
+                                 <button name="submit" class="btn" type="submit">Send Reset Link</button>
+                                 </form>
+                                    <div class="social-icons">
+                                     <p>Back to! <a href="Requester/RequesterLogin.php">Login</a>.</p>
+                                    </div>
+                         </div>
+                    </div>
                 </div>
-              </div>
-                <div class="content-wthree">
-                        <h2>Forgot Password</h2>
-                        <?php echo $msg; ?>
-                        <form action="" method="post">
-                            <input type="email" class="email" name="rEmail" placeholder="Enter Your Email" required>
-                            <button name="submit" class="btn" type="submit">Send Reset Link</button>
-                        </form>
-                        <div class="social-icons">
-                            <p>Back to! <a href="Requester/RequesterLogin.php">Login</a>.</p>
-                        </div>
-                </div>
-            </div>
+         </div>
             <!-- //form -->
         </div>
     </section>
 </body>
 
 </html>
+<script src="js/script.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/namevalidate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>

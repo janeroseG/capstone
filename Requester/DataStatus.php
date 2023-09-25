@@ -28,7 +28,8 @@ if ($_SESSION['is_login']) {
     </div>
 </form>
 <script>
-function validateForm() {
+     
+     function validateForm() {
     // Get the selected date value
     var selectedDate = document.getElementById("selected_date").value;
 
@@ -37,7 +38,7 @@ function validateForm() {
         // Check if the banner is already displayed
         var existingBanner = document.getElementById("errorBanner");
         if (!existingBanner) {
-            // Display notification banner
+            // Display notification banner for empty date
             var banner = document.createElement("div");
             banner.id = "errorBanner";
             banner.style.backgroundColor = "#f44336";
@@ -58,15 +59,54 @@ function validateForm() {
                     banner.remove();
                 }, 1000); // After the fade-out, remove the banner from the DOM
             }, 5000); // Display the banner for 5 seconds (5000 milliseconds)
+
+            // Prevent form submission
+            return false;
         }
+    } else {
+        // Check if there is no data for the selected date
+        // You need to define your logic here to check if there is no data
+        // For example, you can use AJAX to check on the server whether data exists for the selected date.
+        // If no data exists, display an alert banner.
+        // Here, I'll provide a basic example using a hardcoded condition.
+        
+        var noDataAvailable = true; // Set this variable based on your data availability check.
+        
+        if (noDataAvailable) {
+            // Check if the banner is already displayed
+            var existingDataBanner = document.getElementById("noDataBanner");
+            if (!existingDataBanner) {
+                // Display notification banner for no data
+                var dataBanner = document.createElement("div");
+                dataBanner.id = "noDataBanner";
+                dataBanner.style.backgroundColor = "#f44336";
+                dataBanner.style.color = "white";
+                dataBanner.style.textAlign = "center";
+                dataBanner.style.padding = "10px";
+                dataBanner.textContent = "No data available for the selected date.";
+                
+                // Insert the banner before the form
+                var form = document.querySelector("form");
+                form.parentNode.insertBefore(dataBanner, form);
 
-        // Prevent form submission
-        return false;
+                // Set a timeout to remove the banner after 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                    dataBanner.style.transition = "opacity 1s ease-in-out";
+                    dataBanner.style.opacity = "0";
+                    setTimeout(function() {
+                        dataBanner.remove();
+                    }, 1000); // After the fade-out, remove the banner from the DOM
+                }, 5000); // Display the banner for 5 seconds (5000 milliseconds)
+            }
+            
+            // Prevent form submission
+            return false;
+        }
     }
-
-    // Allow form submission if date is selected
+    // Allow form submission if date is selected and data is available
     return true;
 }
+
 </script>
 
 
@@ -95,13 +135,13 @@ function validateForm() {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT COUNT(*) AS total FROM  sensordatas";
+    $sql = "SELECT COUNT(*) AS total FROM  sensordata";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $totalRecords = $row['total'];
     $totalPages = ceil($totalRecords / $recordsPerPage);
 
-    $sql = "SELECT id, location, temperature, humidity, temperature1, humidity1,tempCelsius,pHvalue,conductivity,reading_time FROM  sensordatas ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+    $sql = "SELECT id, location, temperature, humidity, temperature1, humidity1,tempCelsius,pHvalue,conductivity,reading_time FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
  
  
 
@@ -146,7 +186,7 @@ function validateForm() {
     $conn->close();
     ?>
  </table>
-  
+ 
 </div> <!-- End User Change Pasword  Form 2nd Column -->
 
 

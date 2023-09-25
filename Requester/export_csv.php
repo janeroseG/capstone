@@ -18,7 +18,7 @@ if(isset($_POST['export'])){
     $selectedDate = $_POST['selected_date'];
     
     // Modify the SQL query to fetch only the rows with the selected date
-    $sql = "SELECT id, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity, reading_time FROM  sensordatas WHERE DATE(reading_time) = '$selectedDate'";
+    $sql = "SELECT id, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity, reading_time FROM  sensordata WHERE DATE(reading_time) = '$selectedDate'";
 
     $result = $conn->query($sql);
 
@@ -42,7 +42,7 @@ if(isset($_POST['export'])){
         }
 
          // Set headers for CSV file download with dynamic filename
-         $filename = "sensordata_$selectedDate.csv";
+         $filename = "sensordatas_$selectedDate.csv";
          header("Content-type: text/csv");
          header("Content-Disposition: attachment; filename=$filename");
 

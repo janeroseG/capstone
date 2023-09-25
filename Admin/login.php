@@ -17,7 +17,7 @@
     }
 }
 } else {
-    echo"<script> location.href='dashboard.php';</script>";
+    echo"<script> location.href='Admin/dashboard.php';</script>";
 }
 ?>
 
@@ -35,7 +35,7 @@
     <link href="//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!--/Style-CSS -->
-    <link rel="stylesheet" href="../css/styh1.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="../css/styh11.css" type="text/css" media="all" />
 
     <!--//Style-CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
@@ -66,6 +66,7 @@
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" name="aPassword">                  
                 </div>
+                <p><a href="./forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
                 <button type="submit" class="btn-outline-danger mt-5 font-weight-bold btn-block shadow-sm">Login</button>
                 <?php if(isset($msg)) {echo $msg;} ?>
             </form>

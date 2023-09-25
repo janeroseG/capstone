@@ -7,7 +7,7 @@ if (!isset($_SESSION['is_login'])) {
         $rEmail = mysqli_real_escape_string($conn, $_POST['rEmail']);
         $rPassword = mysqli_real_escape_string($conn, $_POST['rPassword']);
 
-        $sql = "SELECT r_email, r_password, is_verified, is_accepted, is_blocked, verification_token FROM requesterlogin_tb WHERE r_email = '$rEmail' LIMIT 1";
+        $sql = "SELECT r_email, r_password, is_verified, is_accepted, is_blocked, verification_token, code FROM requesterlogin_tb WHERE r_email = '$rEmail' LIMIT 1";
         $result = $conn->query($sql);
 
         if ($result->num_rows == 1) {
@@ -16,8 +16,17 @@ if (!isset($_SESSION['is_login'])) {
                 $msg = '<div class="alert alert-danger mt-2">This account has been blocked by the admin.</div>';
             } elseif ($row['is_verified'] == 1) {
                 if ($row['is_accepted'] == 1) {
-                    // Verify the password using password_verify
-                    $storedHashedPassword = $row['r_password'];
+                    // Check if the password has been updated
+                    if (!empty($row['code'])) {
+                        // The code field is not empty, which means the password has been updated
+                        $storedHashedPassword = password_hash($rPassword, PASSWORD_DEFAULT);
+
+                        // Update the user's password in the database
+                        $updatePasswordSql = "UPDATE requesterlogin_tb SET r_password='$storedHashedPassword', code='' WHERE r_email='$rEmail'";
+                        $conn->query($updatePasswordSql);
+                    } else {
+                        $storedHashedPassword = $row['r_password'];
+                    }
 
                     if (password_verify($rPassword, $storedHashedPassword)) {
                         // Password is correct

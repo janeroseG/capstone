@@ -31,7 +31,7 @@ $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($currentPage - 1) * $recordsPerPage;
 
 // Retrieve total records count
-$sqlCount = "SELECT COUNT(*) AS total FROM  sensordatas";
+$sqlCount = "SELECT COUNT(*) AS total FROM  sensordata";
 $resultCount = $conn->query($sqlCount);
 if ($resultCount) {
     $row = $resultCount->fetch_assoc();
@@ -40,7 +40,7 @@ if ($resultCount) {
 }
 
 // Retrieve data with OFFSET and LIMIT for pagination
-$sqlData = "SELECT id, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity, reading_time  FROM  sensordatas ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+$sqlData = "SELECT id, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity, reading_time  FROM  sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
 
 // Assign table values to variables
 $resultData = $conn->query($sqlData);

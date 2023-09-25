@@ -1,25 +1,24 @@
 <?php
-
 $msg = "";
 
 include 'dbConnection.php';
 
 if (isset($_GET['reset'])) {
     $reset_code = mysqli_real_escape_string($conn, $_GET['reset']);
-    $reset_query = "SELECT * FROM requesterlogin_tb WHERE code='$reset_code'";
+    $reset_query = "SELECT * FROM adminlogin_tb WHERE code='$reset_code'";
     $reset_result = mysqli_query($conn, $reset_query);
 
     if (mysqli_num_rows($reset_result) > 0) {
         if (isset($_POST['submit'])) {
-            $rPassword = mysqli_real_escape_string($conn, $_POST['rPassword']);
+            $aPassword = mysqli_real_escape_string($conn, $_POST['aPassword']);
             $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm-password']);
 
-            if ($rPassword === $confirm_password) {
+            if ($aPassword === $confirm_password) {
                 // Hash the new password
-                $hashed_password = password_hash($rPassword, PASSWORD_DEFAULT);
+                $hashed_password = password_hash($aPassword, PASSWORD_DEFAULT);
 
                 // Update the password in the database
-                $update_query = "UPDATE requesterlogin_tb SET r_password='$hashed_password', code='' WHERE code='$reset_code'";
+                $update_query = "UPDATE adminlogin_tb SET a_password='$hashed_password', code='' WHERE code='$reset_code'";
                 $update_result = mysqli_query($conn, $update_query);
 
                 if ($update_result) {
@@ -35,10 +34,8 @@ if (isset($_GET['reset'])) {
         $msg = "<div class='alert alert-danger'>Reset Link do not match.</div>";
     }
 } else {
-    header("Location: forgot-password.php");
+    header("Location: admin-forgot-password.php");
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +76,7 @@ if (isset($_GET['reset'])) {
                         <h2>Change Password</h2>
                         <?php echo $msg; ?>
                         <form action="" method="post">
-                            <input type="password" class="password" name="rPassword" placeholder="Enter Your Password" id = "myInput"  onkeyup="return validate ()" required>
+                            <input type="password" class="password" name="aPassword" placeholder="Enter Your Password" id = "myInput"  onkeyup="return validate ()" required>
                                 <span class="eye" onclick="myFunction()">
                                     <i id = "hide1" class="fa-solid fa-eye"></i>
                                     <i id = "hide2" class="fa-solid fa-eye-slash"></i>
@@ -97,7 +94,7 @@ if (isset($_GET['reset'])) {
                             <button name="submit" class="btn" type="submit">Change Password</button>
                         </form>
                         <div class="social-icons">
-                            <p>Back to! <a href="Requester/RequesterLogin.php">Login</a>.</p>
+                            <p>Back to! <a href="Admin/login.php">Login</a>.</p>
                         </div>
                     </div>
                 </div>

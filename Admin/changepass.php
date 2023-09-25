@@ -1,16 +1,8 @@
 <?php 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require '../path-to-your-PHPMailer-library/src/Exception.php';
-require '../path-to-your-PHPMailer-library/src/PHPMailer.php';
-require '../path-to-your-PHPMailer-library/src/SMTP.php';
-
 define('TITLE', 'Change Password');
 define('PAGE', 'changepass');
 include('includes/header.php');
 include('../dbConnection.php');
-
 session_start();
 
 if (!isset($_SESSION['is_adminlogin'])) {

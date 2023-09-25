@@ -130,8 +130,9 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
     
     
     <footer class="u-align-center u-clearfix u-footer u-custom-color-1 u-footer" id="sec-deb0"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="Fotter u-small-text u-text u-custom-color-1 u-text-variant u-text-1">For more Information Follow us: </p>
-        
+    <p> For more Information Contact us:</p>
+    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=GTvVlcSGLdhVHQHZkCCjjnNlQDdZGjrRvQKzrDvmRLjLRHpwPBlrvcrbcdVbMzwKfXTDCLWvjvWxD" target="_blank">AgriFresh</a>
+
       </div></footer>
    
   

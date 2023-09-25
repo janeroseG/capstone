@@ -25,7 +25,10 @@
   display: flex; 
   align-items: center; 
 }
-
+.sidebar {
+  height: 100vh;
+  /* Add any other styles you want for the sidebar */
+}
 
 .nav-link i {
   margin-right: 10px; 
