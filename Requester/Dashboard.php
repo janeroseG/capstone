@@ -6,6 +6,7 @@ define('PAGE', 'Dashboard');
 include('includes/header.php');
 include('../dbConnection.php');
 session_start();
+
 if ($_SESSION['is_login']) {
     $rEmail = $_SESSION['rEmail'];
 } else {
@@ -21,57 +22,52 @@ $recordsPerPage = 10; // Set the number of records to display per page
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// Initialize variables
+$avgTemperature = $avgHumidity = $avgTemperature1 = $avgHumidity1 = $avgTempCelsius = $avgPHvalue = $avgConductivity = 0;
+$row_temperature = $row_humidity = $row_temperature1 = $row_humidity1 = $row_tempCelsius = $row_pHvalue = $row_conductivity = 0;
 
 // Calculate OFFSET value for pagination
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 $offset = ($currentPage - 1) * $recordsPerPage;
 
 // Retrieve total records count
-$sqlCount = "SELECT COUNT(*) AS total FROM  sensordata";
+$sqlCount = "SELECT COUNT(*) AS total FROM sensordata";
 $resultCount = $conn->query($sqlCount);
+
 if ($resultCount) {
     $row = $resultCount->fetch_assoc();
     $totalRecords = $row['total'];
     $totalPages = ceil($totalRecords / $recordsPerPage);
+} else {
+    // Handle query error
+    die("Error executing query: " . $conn->error);
 }
 
 // Retrieve data with OFFSET and LIMIT for pagination
-$sqlData = "SELECT id, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity, reading_time  FROM  sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+$sqlData = "SELECT id, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity, reading_time  FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
 
 // Assign table values to variables
 $resultData = $conn->query($sqlData);
+
 if ($resultData) {
     // Variables to store sum for averaging
-    $sumTemperature = 0;
-    $sumHumidity = 0;
-    $sumTemperature1 = 0;
-    $sumHumidity1 = 0;
-    $sumTempCelsius = 0;
-    $sumPHvalue = 0;
-    $sumConductivity = 0;
-    $rowCount = 0;
-  
+    $sumTemperature = $sumHumidity = $sumTemperature1 = $sumHumidity1 = $sumTempCelsius = $sumPHvalue = $sumConductivity = $rowCount = 0;
 
     while ($row = $resultData->fetch_assoc()) {
-        $row_temperature = $row["temperature"];
-        $row_humidity = $row["humidity"];
-        $row_temperature1 = $row["temperature1"];
-        $row_humidity1 = $row["humidity1"];
-        $row_tempCelsius = floatval($row["tempCelsius"]);
-        $row_pHvalue = $row["pHvalue"];
-        $row_conductivity = $row["conductivity"];
-      
-        $status_temperature = ( $row_temperature != 0) ? "Active" : "Inactive";
-        $status_humidity = ($row_humidity != 0) ? "Active" : "Inactive";
-        $status_temperature1 = ($row_temperature1 != 0) ? "Active" : "Inactive";
-        $status_humidity1 = ($row_humidity1 != 0) ? "Active" : "Inactive";
-        $status_tempCelsius = ($row_tempCelsius != 0) ? "Active" : "Inactive";
-        $status_pHvalue = ($row_pHvalue != 0) ? "Active" : "Inactive";
-        $status_conductivity = ($row_conductivity != 0) ? "Active" : "Inactive"; 
+        // Check if the data exists before accessing it
+        $row_temperature = isset($row["temperature"]) ? $row["temperature"] : 0;
+        $row_humidity = isset($row["humidity"]) ? $row["humidity"] : 0;
+        $row_temperature1 = isset($row["temperature1"]) ? $row["temperature1"] : 0;
+        $row_humidity1 = isset($row["humidity1"]) ? $row["humidity1"] : 0;
+        $row_tempCelsius = floatval(isset($row["tempCelsius"]) ? $row["tempCelsius"] : 0);
+        $row_pHvalue = isset($row["pHvalue"]) ? $row["pHvalue"] : 0;
+        $row_conductivity = isset($row["conductivity"]) ? $row["conductivity"] : 0;
 
         // Add values for averaging
         $sumTemperature += $row_temperature;
@@ -92,8 +88,9 @@ if ($resultData) {
     $avgTempCelsius = $sumTempCelsius / $rowCount;
     $avgPHvalue = $sumPHvalue / $rowCount;
     $avgConductivity = $sumConductivity / $rowCount;
-
-    
+} else {
+    // Handle query error
+    die("Error executing query: " . $conn->error);
 }
 
 $conn->close();
