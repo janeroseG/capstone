@@ -70,14 +70,51 @@ if ($resultData) {
         $row_conductivity = isset($row["conductivity"]) ? $row["conductivity"] : 0;
 
         // Add values for averaging
-        $sumTemperature += $row_temperature;
-        $sumHumidity += $row_humidity;
-        $sumTemperature1 += $row_temperature1;
-        $sumHumidity1 += $row_humidity1;
-        $sumTempCelsius += $row_tempCelsius;
-        $sumPHvalue += $row_pHvalue;
-        $sumConductivity += $row_conductivity;
-        $rowCount++;
+        $sumTemperature = 0;
+        $sumHumidity = 0;
+        $sumTemperature1 = 0;
+        $sumHumidity1 = 0;
+        $sumTempCelsius = 0;
+        $sumPHvalue = 0;
+        $sumConductivity = 0;
+        $rowCount = 0;
+        
+        while ($row = $resultData->fetch_assoc()) {
+            // Check if the data exists before accessing it
+            $row_temperature = isset($row["temperature"]) ? $row["temperature"] : 0;
+            $row_humidity = isset($row["humidity"]) ? $row["humidity"] : 0;
+            $row_temperature1 = isset($row["temperature1"]) ? $row["temperature1"] : 0;
+            $row_humidity1 = isset($row["humidity1"]) ? $row["humidity1"] : 0;
+            $row_tempCelsius = isset($row["tempCelsius"]) ? $row["tempCelsius"] : 0;
+            $row_pHvalue = isset($row["pHvalue"]) ? $row["pHvalue"] : 0;
+            $row_conductivity = isset($row["conductivity"]) ? $row["conductivity"] : 0;
+        
+            // Check if the values are numeric before adding them to the sum
+            if (is_numeric($row_temperature)) {
+                $sumTemperature += $row_temperature;
+            }
+            if (is_numeric($row_humidity)) {
+                $sumHumidity += $row_humidity;
+            }
+            if (is_numeric($row_temperature1)) {
+                $sumTemperature1 += $row_temperature1;
+            }
+            if (is_numeric($row_humidity1)) {
+                $sumHumidity1 += $row_humidity1;
+            }
+            if (is_numeric($row_tempCelsius)) {
+                $sumTempCelsius += $row_tempCelsius;
+            }
+            if (is_numeric($row_pHvalue)) {
+                $sumPHvalue += $row_pHvalue;
+            }
+            if (is_numeric($row_conductivity)) {
+                $sumConductivity += $row_conductivity;
+            }
+            
+            $rowCount++;
+        }
+        
     }
 
     // Calculate averages
