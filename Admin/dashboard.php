@@ -46,7 +46,7 @@ $totalnotaccepted = $row['total_not_accepted'];
         </div>
         <div class="col-sm-4 mt-5">
             <div class="card text-white bg-info mb-3" style="max-width:18rem;">
-                <div class="card-header">Total Registered </div>
+                <div class="card-header">Requests </div>
                 <div class="card-body">
                     <h4 class="card-title"><?php echo $totalnotaccepted; ?></h4>
                 </div>

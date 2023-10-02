@@ -153,9 +153,9 @@ if ($_SESSION['is_login']) {
         <th>Humidity Outside &#37;</th>
         <th>Temperature Inside &deg;C</th> 
         <th>Humidity1 Inside &#37;</th>
-        <th>Water Temperature &deg;C</th>
+        <th>Water Conductivity</th> 
         <th>PH level</th>
-        <th>Water Conductivity</th>
+        <th>Water Temperature &deg;C</th>
       </tr>';
 
     if ($result = $conn->query($sql)) {

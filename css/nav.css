@@ -43,7 +43,7 @@
 }
 
 /* Media query for smaller screens where you want to reduce the height */
-@media (max-width: 768px) {
+@media (max-width: 798px) {
   .custom-sidebar {
       height: auto; /* or any specific height you prefer for smaller screens */
   }

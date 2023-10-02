@@ -63,10 +63,10 @@ if ($result = $conn->query($sql)) {
 
         $dataPoints2[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature2, "name" => "Temperature2");
         $dataPoints2h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity2, "name" => "Humidity2");
+        $dataPoints4[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_conductivity, "name" => "conductivity");
+       
 
         $dataPoints3[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_tempCelsius, "name" => "tempCelsius");
-
-        $dataPoints4[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_conductivity, "name" => "conductivity");
         $dataPoints4b[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_pHvalue, "name" => "pHvalue");
     }
     $result->free();
@@ -180,7 +180,7 @@ window.onload = function () {
         backgroundColor: "#D9D9D9",
         animationEnabled: true,
         title: {
-        text: "Water Temperature",
+        text: "Water Conductivity",
         fontFamily: "Roboto, sans-serif" // Set a font family without bold weight
     },
         axisY: {
@@ -217,11 +217,11 @@ window.onload = function () {
         backgroundColor: "#D9D9D9",
         animationEnabled: true,
         title: {
-        text: "pH Level - Water Conductivity",
+        text: "pH Level - Water Temperature",
         fontFamily: "Roboto, sans-serif" 
     },
         axisY: {
-            title: "pH/Conductivity",
+            title: "pH/Temperature",
             valueFormatString: "#0.##",
             suffix: "Cel",
             prefix: ""
