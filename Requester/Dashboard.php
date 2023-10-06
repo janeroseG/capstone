@@ -175,9 +175,9 @@ $conn->close();
                             { label: "Humidity", y: <?php echo $avgHumidity; ?> },
                             { label: "Temperature1", y: <?php echo $avgTemperature1; ?> },
                             { label: "Humidity1", y: <?php echo $avgHumidity1; ?> },
-                            { label: "Conductivity", y: <?php echo $avgTempCelsius; ?> },
+                            { label: "TempCelsius", y: <?php echo $avgTempCelsius; ?> },
                             { label: "pHValue", y: <?php echo $avgPHvalue; ?> },
-                            { label: "TempCelsius", y: <?php echo $avgConductivity; ?> }
+                            { label: "Conductivity", y: <?php echo $avgConductivity; ?> }
                         ]
                     }]
                 });
@@ -218,8 +218,8 @@ $conn->close();
                 <i class="uil uil-temperature"></i>
                 <span class="text">Water</span>
                 <span class="text">Temperature</span>
-                <span class="number"><?php echo $row_conductivity; ?></span>
-                
+                <span class="number"><?php echo $row_tempCelsius; ?></span>
+              
             </div>
             <div class="box box6">
                 <i class="uil uil-thermometer"></i>
@@ -231,7 +231,7 @@ $conn->close();
                 <i class="uil uil-flask"></i>
                 <span class="text">Water</span>
                 <span class="text">Conductivity</span>
-                <span class="number"><?php echo $row_tempCelsius; ?></span>
+                <span class="number"><?php echo $row_conductivity; ?></span>
             </div>
         </div>
 
@@ -321,7 +321,7 @@ $conn->close();
             <?php echo $status_humidity1; ?>
         </td>
         </tr>
-        <td>Conductivity</td>
+        <td>Water Temperature</td>
         <?php
         $tempCelsiusStatus = ($row_tempCelsius == 0) ? 'Below Normal' : ($row_tempCelsius > 25 ? 'Above Normal' : 'Normal');
         $tempCelsiusClass = ($row_tempCelsius == 0) ? 'below-normal-label' : ($row_tempCelsius > 25 ? 'above-normal-label' : 'normal-label');
@@ -347,7 +347,7 @@ $conn->close();
         </td>
     </tr>
     <tr>
-    <td>Water Temperature</td>
+    <td>Water Conductivity</td>
 <?php
 if (is_numeric($row_conductivity)) {
     if ($row_conductivity == 0) {
@@ -373,8 +373,6 @@ if (is_numeric($row_conductivity)) {
     <?php echo $status_conductivity; ?>
 </td>
 </tr>
-
-   
 </table>
 
 

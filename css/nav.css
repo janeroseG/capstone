@@ -1,5 +1,5 @@
 .back-image {
-    background-color: rgb(0, 255, 166);
+    background-color: rgb(170, 177, 175);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -24,10 +24,11 @@
 .nav-link {
   display: flex; 
   align-items: center; 
+  flex-wrap: wrap;
 }
 .sidebar {
   height: 100vh;
-  /* Add any other styles you want for the sidebar */
+
 }
 
 .nav-link i {
@@ -37,15 +38,11 @@
   background-color: #aeaaaa;
 
 }
-/* Define a default height */
+
 .custom-sidebar {
   height: 100%;
+  
 }
 
-/* Media query for smaller screens where you want to reduce the height */
-@media (max-width: 798px) {
-  .custom-sidebar {
-      height: auto; /* or any specific height you prefer for smaller screens */
-  }
-}
+
 

@@ -195,7 +195,7 @@ function isVerificationLinkValid($verificationLink) {
                             <li id='lower'> Atleast one lowercase</li>
                             <li id='special_char'> Atleast one special symbol</li>
                             <li id='number'> Atleast one number</li>
-                         <li id='length'> Make your password atleast 6-8 character</li>
+                        
                         </ul>
 
                         <div class="input-box">

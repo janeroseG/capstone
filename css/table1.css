@@ -1,27 +1,27 @@
 .table-container {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 5px; /* Reduced margin-bottom to make it smaller */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color:  #d2e7d6; /* Green color */
+  background-color: #d2e7d6; /* Green color */
 }
 
 th, td {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
 }
 
 th {
-  background-color:#b8d8be; /* Green color */
+  background-color: #b8d8be; /* Green color */
   font-weight: bold;
 }
 
 td {
   border-bottom: 1px solid #d3cbcb; /* Changed to gray color */
 }
-
 
 .pagination {
   margin-top: 20px;

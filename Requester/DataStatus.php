@@ -153,13 +153,18 @@ if ($_SESSION['is_login']) {
         <th>Humidity Outside &#37;</th>
         <th>Temperature Inside &deg;C</th> 
         <th>Humidity1 Inside &#37;</th>
-        <th>Water Conductivity</th> 
-        <th>PH level</th>
         <th>Water Temperature &deg;C</th>
+        <th>PH level</th>
+        <th>Water Conductivity</th> 
       </tr>';
-
-    if ($result = $conn->query($sql)) {
+      if ($result = $conn->query($sql)) {
+        $row_counter = 0; // Initialize a row counter
+    
         while ($row = $result->fetch_assoc()) {
+            if ($row_counter >= 6) {
+                break; // Exit the loop after displaying 6 rows
+            }
+    
             $row_reading_time = $row["reading_time"];
             $row_temperature = $row["temperature"];
             $row_humidity = $row["humidity"];
@@ -168,9 +173,8 @@ if ($_SESSION['is_login']) {
             $row_tempCelsius = $row["tempCelsius"];
             $row_pHvalue = $row["pHvalue"];
             $row_conductivity = $row["conductivity"];
-
+    
             echo '<tr> 
-               
                 <td>' . $row_reading_time . '</td> 
                 <td>' . $row_temperature . '</td> 
                 <td>' . $row_humidity . '</td>
@@ -180,9 +184,13 @@ if ($_SESSION['is_login']) {
                 <td>' . $row_pHvalue . '</td> 
                 <td>' . $row_conductivity . '</td>  
               </tr>';
+    
+            $row_counter++; // Increment the row counter
         }
+    
         $result->free();
     }
+    
     $conn->close();
     ?>
  </table>
@@ -190,24 +198,30 @@ if ($_SESSION['is_login']) {
 </div> <!-- End User Change Pasword  Form 2nd Column -->
 
 
- 
 <div class="pagination">
-<?php if ($currentPage > 1) : ?>
-    <a href="?page=<?php echo $currentPage - 1; ?>">Previous</a>
-<?php endif; ?>
-
-<?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-    <?php if ($i == $currentPage) : ?>
-        <span class="current-page"><?php echo $i; ?></span>
-    <?php else : ?>
-        <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+    <?php if ($currentPage > 1) : ?>
+        <a href="?page=<?php echo $currentPage - 1; ?>">Previous</a>
     <?php endif; ?>
-<?php endfor; ?>
 
-<?php if ($currentPage < $totalPages) : ?>
-    <a href="?page=<?php echo $currentPage + 1; ?>">Next</a>
-<?php endif; ?>
+    <?php
+    $startPage = max(1, $currentPage - 2);
+    $endPage = min($totalPages, $startPage + 4);
+
+    for ($i = $startPage; $i <= $endPage; $i++) :
+        if ($i == $currentPage) :
+    ?>
+            <span class="current-page"><?php echo $i; ?></span>
+        <?php else : ?>
+            <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <?php endif; ?>
+    <?php endfor; ?>
+
+    <?php if ($currentPage < $totalPages) : ?>
+        <a href="?page=<?php echo $currentPage + 1; ?>">Next</a>
+    <?php endif; ?>
 </div>
+
+
 <?php
 include('includes/footer.php');
 ?>
