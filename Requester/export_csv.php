@@ -54,6 +54,5 @@ if(isset($_POST['export'])){
         
     }
 
-    $conn->close();
 }
 ?>
