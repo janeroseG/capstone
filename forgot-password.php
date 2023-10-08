@@ -43,7 +43,7 @@ if (isset($_SESSION['rEmail'])) {
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Here is the subject';
-        $mail->Body    = 'Here is the verification link <b><a href="http://localhost/ProjectSystem_v2/change-password.php?reset='.$code.'">http://localhost/ProjectSystem_v2/change-password.php?reset='.$code.'</a></b>';
+        $mail->Body    = 'Here is the forgot password link <b><a href="http://localhost/ProjectSystem_v2/change-password.php?reset='.$code.'">http://localhost/ProjectSystem_v2/change-password.php?reset='.$code.'</a></b>';
 
     
         $mail->send();

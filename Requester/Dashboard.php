@@ -143,7 +143,7 @@ if ($resultData) {
 $conn->close();
 ?>
 
-<div class="col-sm-9 col-md-10" style="margin-top: 30px;">
+<div class="col-sm-12 col-md-10" style="margin-top: 30px; left: 230px;">
     <!DOCTYPE HTML>
     <html>
     <head>
@@ -236,9 +236,9 @@ $conn->close();
         </div>
 
         <div class="container">
-        <div id="chartContainer" style="height: 370px; width: 50%; padding-right: 10px; margin-bottom: 20px;"></div>
+        <div id="chartContainer" style="height: 320px; width: 50%; padding-right: 10px; margin-bottom: 20px;"></div>
 <!-- Normal and Above Normal Sensors Table -->
-<table id="normal-above-normal-sensors" style="height: 370px; width: 50%; padding-left: 30px; padding-right: 10px; margin-left: 20px;">
+<table id="normal-above-normal-sensors" style="height: 170px; width: 50%; padding-left: 30px; padding-right: 10px; margin-left: 20px; margin-bottom: 20px;">
     <tr>
         <th>Sensor</th>
         <th>Status</th>

@@ -14,8 +14,8 @@ if(isset($_SESSION['is_adminlogin'])){
 ?>
 <meta http-equiv="refresh" content="60"> 
 
-<div class="col-sm-9 col-md-10 mt-5 text-center">
-<p class="bg-dark text-white p-2">List of Users</p>
+<div class="col-sm-12 col-md-10" style="margin-top: 30px; left: 230px;">
+<p class="bg-dark text-white p-2 text-center">List of Users</p>
     
     <?php
     $sql = "SELECT * FROM requesterlogin_tb WHERE is_accepted = 1";
