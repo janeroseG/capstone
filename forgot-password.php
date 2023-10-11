@@ -5,7 +5,7 @@ if (isset($_SESSION['rEmail'])) {
     die();
 }
     use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\S
     use PHPMailer\PHPMailer\Exception;
 
     include 'dbConnection.php';
