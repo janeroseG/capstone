@@ -1,6 +1,5 @@
 <?php
 $msg = "";
-
 include 'dbConnection.php';
 
 if (isset($_GET['reset'])) {
@@ -31,65 +30,60 @@ if (isset($_GET['reset'])) {
             }
         }
     } else {
-        $msg = "<div class='alert alert-danger'>Reset Link do not match.</div>";
+        $msg = "<div class='alert alert-danger'>Reset Link does not match.</div>";
     }
 } else {
-    header("Location: admin-forgot-password.php");
+    header("Location: forgot-password1.php"); // Redirect to the forgot password page
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Login Form</title>
+    <title>Change Password</title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
-    <meta name="keywords" content="Login Form" />
+    <meta name="keywords" content="Change Password" />
     <!-- //Meta tag Keywords -->
-
+    
     <link href="//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    
     <!--/Style-CSS -->
     <link rel="stylesheet" href="css/styh11.css" type="text/css" media="all" />
-
-
+    
     <!--//Style-CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
-
+    
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
-
-
     
 </head>
-
 <body>
- <!-- form section start -->
- <section class="w3l-mockup-form">
+    <!-- form section start -->
+    <section class="w3l-mockup-form">
         <div class="container">
             <!-- /form -->
             <div class="workinghny-form-grid" >
-            <div class="main-mockup">
-                <div class="w3l_form align-self" style="background-image: url('images/5a.png');"> </div>
+                <div class="main-mockup">
+                    <div class="w3l_form align-self" style="background-image: url('images/5a.png');"> </div>
                     <div class="content-wthree">
                         <h2>Change Password</h2>
                         <?php echo $msg; ?>
                         <form action="" method="post">
-                            <input type="password" class="password" name="aPassword" placeholder="Enter Your Password" id = "myInput"  onkeyup="return validate ()" required>
-                                <span class="eye" onclick="myFunction()">
-                                    <i id = "hide1" class="fa-solid fa-eye"></i>
-                                    <i id = "hide2" class="fa-solid fa-eye-slash"></i>
-                                 </span>
+                            <input type="password" class="password" name="aPassword" placeholder="Enter Your Password" id="myInput" onkeyup="return validate()" required>
+                            <span class="eye" onclick="myFunction()">
+                                <i id="hide1" class="fa-solid fa-eye"></i>
+                                <i id="hide2" class="fa-solid fa-eye-slash"></i>
+                            </span>
                             <ul>
-                                <li id='upper'> Atleast one uppercase </li>
-                                <li id='lower'> Atleast one lowercase</li>
-                                <li id='special_char'> Atleast one special symbol</li>
-                                <li id='number'> Atleast one number</li>
-                                <li id='length'> Make your password atleast 6-8 character</li>
+                                <li id="upper">At least one uppercase</li>
+                                <li id="lower">At least one lowercase</li>
+                                <li id="special_char">At least one special symbol</li>
+                                <li id="number">At least one number</li>
+                                <li id="length">Make your password at least 6-8 characters</li>
                             </ul>
                             
-                            <input type="password" class="confirm-password" name="confirm-password" placeholder="Enter Your Confirm Password" id ="confirmPw"  onkeyup="return confirmPassword()" required>
+                            <input type="password" class="confirm-password" name="confirm-password" placeholder="Enter Your Confirm Password" id="confirmPw" onkeyup="return confirmPassword()" required>
                          
                             <button name="submit" class="btn" type="submit">Change Password</button>
                         </form>
@@ -102,8 +96,6 @@ if (isset($_GET['reset'])) {
             <!-- //form -->
         </div>
     </section>
-  
-
     <script src="js/jquery.min.js"></script>
     <script>
         function validate(){

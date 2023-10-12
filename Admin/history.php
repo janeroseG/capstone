@@ -38,9 +38,9 @@ if(isset($_POST['unblock'])){
     }
 }
 ?>
+<div class="col-sm-12 col-md-10" style="margin-top: 30px; left: 230px;">
 
-<div class="col-sm-9 col-md-10 mt-5 text-center">
-<p class="bg-dark text-white p-2">History</p>
+<p class="bg-dark text-white p-2 text-center">History</p>
     
     <table class="table">
         <thead>

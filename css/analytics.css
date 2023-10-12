@@ -1,0 +1,32 @@
+/* Target the div with class "customize" */
+.customize {
+    margin-left: 230px;
+}
+
+/* Style the h2 element inside the "customize" div */
+.customize h2 {
+    font-size: 18px; /* Adjust the font size as needed */
+    margin-bottom: 10px; /* Add spacing below the heading */
+}
+
+/* Style the buttons with class "custom-button" */
+.custom-button {
+    background-color: rgb(170, 177, 175); /* Button background color */
+    color: #000000; /* Text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Add padding to the buttons */
+    margin-right: 10px; /* Add spacing between buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 5px;
+    
+}
+
+/* Style the buttons on hover */
+.custom-button:hover {
+    background-color:  #d0dbdb; /* Change background color on hover */
+}
+
+/* Adjust button styles for different screen sizes if needed */
+@media (max-width: 768px) {
+    /* Add responsive styles here */
+}

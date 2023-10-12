@@ -96,8 +96,8 @@ if ($resultData) {
 
 $conn->close();
 ?>
+<div class="col-sm-12 col-md-10 text-center;" style="margin-top: 30px; left: 230px;">
 
-<div class="col-sm-9 col-md-10" style="margin-top: 40px;">
     <!DOCTYPE HTML>
     <html>
     <head>
