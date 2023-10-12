@@ -3,9 +3,18 @@
     "public": "public",
     "rewrites": [
       {
-        "source": "/",
+        "source": "/my-app/**",
         "destination": "/ProjectSystem_v2/index.php"
+      },
+      {
+        "source": "**",
+        "destination": "/404.html"
       }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
     ]
   }
 }

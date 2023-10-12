@@ -25,7 +25,7 @@ if ($_SESSION['is_login']) {
     <div class="description">Project Manager and Software Analyst, 
       responsible for managing and bringing up the whole team with whatever progress it may produce throughout the time frame . </div>
   </div>
-
+  
   <div class="feature">
     <p>Hacker</p>
     <img src="../images/lorenz1.png" alt="secure icon" class="bottom-image">
