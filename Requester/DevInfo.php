@@ -13,7 +13,7 @@ if ($_SESSION['is_login']) {
 ?>
 
 <!-- Include the CSS file -->
-<link rel="stylesheet" href="../css/Dev1.css">
+<link rel="stylesheet" href="../css/Dev.css">
 <link rel="stylesheet" href="../css/dash.css">
 <div class="col-sm-9 col-md-10" style="margin-top:-15px;left: 230px">
 <div class="feature-container">
