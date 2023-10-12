@@ -1,25 +1,34 @@
 <?php 
-    include('../dbConnection.php');
-    session_start();
-    if(!isset($_SESSION ['is_adminlogin'])){
-    if(isset($_REQUEST['aEmail'])){
-    $aEmail = mysqli_real_escape_string($conn, trim($_REQUEST['aEmail']));
-    $aPassword = mysqli_real_escape_string($conn, trim($_REQUEST['aPassword']));
-    $sql = "SELECT a_email, a_password FROM adminlogin_tb WHERE a_email ='".$aEmail."' AND a_password = '".$aPassword."' limit 1";
-    $result = $conn->query($sql);
-    if($result->num_rows == 1){
-        $_SESSION['is_adminlogin'] = true;
-        $_SESSION['aEmail'] = $aEmail;
-        echo "<script> location.href='dashboard.php';</script>";
-        exit;
-    } else {
-        $msg = '<div class="alert alert-warning mt-2">Enter Valid  Email and Password</div>';
+include('../dbConnection.php');
+session_start();
+
+if (!isset($_SESSION['is_adminlogin'])) {
+    if (isset($_REQUEST['aEmail'])) {
+        $aEmail = mysqli_real_escape_string($conn, trim($_REQUEST['aEmail']));
+        $aPassword = mysqli_real_escape_string($conn, trim($_REQUEST['aPassword']));
+        $sql = "SELECT a_login_id, a_email, a_password FROM adminlogin_tb WHERE a_email ='$aEmail' LIMIT 1";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            if (password_verify($aPassword, $row['a_password'])) {
+                $_SESSION['is_adminlogin'] = true;
+                $_SESSION['a_login_id'] = $row['a_login_id'];
+                $_SESSION['aEmail'] = $aEmail;
+                echo "<script> location.href='dashboard.php';</script>";
+                exit;
+            } else {
+                $msg = '<div class="alert alert-warning mt-2">Invalid Email or Password</div>';
+            }
+        } else {
+            $msg = '<div class="alert alert-warning mt-2">Invalid Email or Password</div>';
+        }
     }
-}
 } else {
-    echo"<script> location.href='Admin/dashboard.php';</script>";
+    echo "<script> location.href='Admin/dashboard.php';</script>";
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +75,7 @@
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" name="aPassword">                  
                 </div>
-                <p><a href="./forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
+                <p><a href="../forgot-password1.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
                 <button type="submit" class="btn-outline-danger mt-5 font-weight-bold btn-block shadow-sm">Login</button>
                 <?php if(isset($msg)) {echo $msg;} ?>
             </form>

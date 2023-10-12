@@ -14,24 +14,23 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/nav.css">
-
+    
     <title><?php echo TITLE ?></title>
 </head>
-<body style="background-color:#d9d9d9">
+
+        <body style="background-color:#d9d9d9">
   <!-- Top Navbar -->
+  
   <nav class="navbar navbar-dark fixed-top bg-success flex-md-nowrap p-0 ">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="RequesterProfile.php">
-      <img src="../images/agrilogo.png" alt="Logo" style="height: 60px; width: 100px; padding-bottom: 5px;">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="Dashboard.php">
+      <img src="../images/agri (2).png" alt="Logo" style="height: 70px; width: 80px; padding-bottom:1px; margin-left: 50px">
     </a>
 </nav>
     <!--  Start Container -->
     <div class="container-fluid" style="margin-top:50px;">
     <div class="row">   <!--  Start Row -->
-
-  <br>
-
-  <nav class="col-sm-2 col-md-3 col-lg-2 bg-gray sidebar py-5 d-print-none">  <!-- Side Bar 1st Column -->
-        <div class="sidebar-sticky">
+    <nav class=" sidebar col-sm-5 col-md-3 col-lg-2 bg-gray sidebar py-5 d-print-none" style="height: 100vh;"> 
+    <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link <?php if(PAGE == 'Dashboard'){echo 'active';} ?>" href="Dashboard.php"><i class="fas fa-qrcode"  style="margin-right: 10px;"></i>Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link <?php if(PAGE == 'DataStatus'){echo 'active';} ?>" href="DataStatus.php"><i class="fas fa-database"  style="margin-right: 10px;"></i>Datalog</a></li>
@@ -42,4 +41,3 @@
         </div>
         
     </nav>  <!-- End Side Bar 1st Column -->
-    

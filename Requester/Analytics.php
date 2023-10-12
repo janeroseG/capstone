@@ -12,14 +12,14 @@ if($_SESSION['is_login']){
 
 
 ?>
-<div class="col-sm-9 col-md-10" style="margin-top: 50px;">   
+<div class="col-sm-9 col-md-10" style="margin-top: 50px; left: 230px">   
 <?php
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "datalogdb";
 // Set the number of records to display per page
-$recordsPerPage = 12;
+$recordsPerPage = isset($_GET['recordsPerPage']) ? intval($_GET['recordsPerPage']) : 31;
 
 // Get the current page number from the URL
 if (isset($_GET['page'])) {
@@ -63,10 +63,10 @@ if ($result = $conn->query($sql)) {
 
         $dataPoints2[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature2, "name" => "Temperature2");
         $dataPoints2h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity2, "name" => "Humidity2");
+        $dataPoints4[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_conductivity, "name" => "conductivity");
+       
 
         $dataPoints3[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_tempCelsius, "name" => "tempCelsius");
-
-        $dataPoints4[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_conductivity, "name" => "conductivity");
         $dataPoints4b[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_pHvalue, "name" => "pHvalue");
     }
     $result->free();
@@ -77,7 +77,7 @@ $conn->close();
 <!DOCTYPE HTML>
 <html>
 <head>
-
+<link rel="stylesheet" href="../css/analytics.css">
 <script>
 window.onload = function () {
 
@@ -180,7 +180,7 @@ window.onload = function () {
         backgroundColor: "#D9D9D9",
         animationEnabled: true,
         title: {
-        text: "Water Temperature",
+        text: "Water Conductivity",
         fontFamily: "Roboto, sans-serif" // Set a font family without bold weight
     },
         axisY: {
@@ -217,11 +217,11 @@ window.onload = function () {
         backgroundColor: "#D9D9D9",
         animationEnabled: true,
         title: {
-        text: "pH Level - Water Conductivity",
+        text: "pH Level - Water Temperature",
         fontFamily: "Roboto, sans-serif" 
     },
         axisY: {
-            title: "pH/Conductivity",
+            title: "pH/Temperature",
             valueFormatString: "#0.##",
             suffix: "Cel",
             prefix: ""
@@ -263,10 +263,25 @@ window.onload = function () {
 
     
 }
+function setRecordsPerPage(records) {
+        // Redirect to the same page with the selected number of records as a query parameter
+        window.location.href = `Analytics.php?recordsPerPage=${records}`;
+    }
 </script>
+<nav class="navbar navbar-dark fixed-top bg-success flex-md-nowrap p-0 ">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="Dashboard.php">
+      <img src="../images/agri (2).png" alt="Logo" style="height: 70px; width: 80px; padding-bottom:1px; margin-left: 50px">
+    </a>
+    <div class="customize left-230px">
+    <button class="custom-button" onclick="setRecordsPerPage(12)">Daily</button>
+    <button class="custom-button" onclick="setRecordsPerPage(12*7)">Weekly</butto>
+    <button class="custom-button" onclick="setRecordsPerPage(12*31)">Monthly</butto>
 
+</div>
+</nav>
 </head>
 <body>
+
 
 <div class="container1">
 <div id="chartContainer" style="height: 370px; width: 40%; padding-left: 30px; padding-right: 20px;"></div>
@@ -320,7 +335,7 @@ window.onload = function () {
 
 <div class="container">
   <div class="chart-container">
-    <div id="chartContainer2" style="height: 370px; width: 80%; padding: 10px; padding-left: 20px; padding-right: 20px;"></div>
+    <div id="chartContainer2" style="height: 370px; width: 80%; padding: 10px; padding-left: 20px; padding-right: 20px; margin-top:-5px;"></div>
     <div id="chartContainer3" style="height: 370px; width: 80%; padding-left: 20px; padding-right: 20px; padding-top: 30px;"></div>
   </div>
 </div>
