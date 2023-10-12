@@ -270,7 +270,7 @@ function setRecordsPerPage(records) {
 </script>
 <nav class="navbar navbar-dark fixed-top bg-success flex-md-nowrap p-0 ">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="Dashboard.php">
-      <img src="../images/Untitled design (2).png" alt="Logo" style="height: 70px; width: 80px; padding-bottom:1px; margin-left: 50px">
+      <img src="../images/agri (2).png" alt="Logo" style="height: 70px; width: 80px; padding-bottom:1px; margin-left: 50px">
     </a>
     <div class="customize left-230px">
     <button class="custom-button" onclick="setRecordsPerPage(12)">Daily</button>
