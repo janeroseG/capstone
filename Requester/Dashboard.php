@@ -248,8 +248,8 @@ $conn->close();
     <td>Temperature</td>
         <?php
         if (is_numeric($row_temperature)) {
-            $temperatureStatus = ($row_temperature == 0) ? 'Below Normal' : ($row_temperature > 25 ? 'Above Normal' : 'Normal');
-            $temperatureClass = ($row_temperature == 0) ? 'below-normal-label' : ($row_temperature > 25 ? 'above-normal-label' : 'normal-label');
+            $temperatureStatus = ($row_temperature == 0) ? 'Below Normal' : ($row_temperature > 35 ? 'Above Normal' : 'Normal');
+            $temperatureClass = ($row_temperature == 0) ? 'below-normal-label' : ($row_temperature > 35 ? 'above-normal-label' : 'normal-label');
         } else {
             // Handle NaN or non-numeric values as "Not Normal"
             $temperatureStatus = 'Not Normal';
@@ -268,8 +268,8 @@ $conn->close();
         <td>Humidity</td>
         <?php
         if (is_numeric($row_humidity)) {
-            $humidityStatus = ($row_humidity == 0) ? 'Below Normal' : ($row_humidity > 25 ? 'Above Normal' : 'Normal');
-            $humidityClass = ($row_humidity == 0) ? 'below-normal-label' : ($row_humidity > 25 ? 'above-normal-label' : 'normal-label');
+            $humidityStatus = ($row_humidity == 0) ? 'Below Normal' : ($row_humidity > 70 ? 'Above Normal' : 'Normal');
+            $humidityClass = ($row_humidity == 0) ? 'below-normal-label' : ($row_humidity > 70 ? 'above-normal-label' : 'normal-label');
         } else {
             // Handle NaN or non-numeric values as "Not Normal"
             $humidityStatus = 'Not Normal';
@@ -287,8 +287,8 @@ $conn->close();
         <td>Temperature1</td>
         <?php
         if (is_numeric($row_temperature1)) {
-            $temperature1Status = ($row_temperature1 == 0) ? 'Below Normal' : ($row_temperature1 > 25 ? 'Above Normal' : 'Normal');
-            $temperature1Class = ($row_temperature1 == 0) ? 'below-normal-label' : ($row_temperature1 > 25 ? 'above-normal-label' : 'normal-label');
+            $temperature1Status = ($row_temperature1 == 0) ? 'Below Normal' : ($row_temperature1 > 45 ? 'Above Normal' : 'Normal');
+            $temperature1Class = ($row_temperature1 == 0) ? 'below-normal-label' : ($row_temperature1 > 45 ? 'above-normal-label' : 'normal-label');
         } else {
             // Handle NaN or non-numeric values as "Not Normal"
             $temperature1Status = 'Not Normal';
@@ -306,8 +306,8 @@ $conn->close();
         <td>Humidity1</td>
         <?php
         if (is_numeric($row_humidity1)) {
-            $humidity1Status = ($row_humidity1 == 0) ? 'Below Normal' : ($row_humidity1 > 25 ? 'Above Normal' : 'Normal');
-            $humidity1Class = ($row_humidity1 == 0) ? 'below-normal-label' : ($row_humidity1 > 25 ? 'above-normal-label' : 'normal-label');
+            $humidity1Status = ($row_humidity1 == 0) ? 'Below Normal' : ($row_humidity1 > 90 ? 'Above Normal' : 'Normal');
+            $humidity1Class = ($row_humidity1 == 0) ? 'below-normal-label' : ($row_humidity1 > 90 ? 'above-normal-label' : 'normal-label');
         } else {
             // Handle NaN or non-numeric values as "Not Normal"
             $humidity1Status = 'Not Normal';
@@ -323,8 +323,8 @@ $conn->close();
         </tr>
         <td>Water Temperature</td>
         <?php
-        $tempCelsiusStatus = ($row_tempCelsius == 0) ? 'Below Normal' : ($row_tempCelsius > 25 ? 'Above Normal' : 'Normal');
-        $tempCelsiusClass = ($row_tempCelsius == 0) ? 'below-normal-label' : ($row_tempCelsius > 25 ? 'above-normal-label' : 'normal-label');
+        $tempCelsiusStatus = ($row_tempCelsius == 0) ? 'Below Normal' : ($row_tempCelsius > 35 ? 'Above Normal' : 'Normal');
+        $tempCelsiusClass = ($row_tempCelsius == 0) ? 'below-normal-label' : ($row_tempCelsius > 35 ? 'above-normal-label' : 'normal-label');
         ?>
         <td class="<?php echo $tempCelsiusClass; ?>">
             <?php echo $tempCelsiusStatus; ?>
@@ -334,25 +334,25 @@ $conn->close();
         </td>
     </tr>
     <tr>
-        <td>pH Value</td>
-        <?php
-        $pHValueStatus = ($row_pHvalue == 0) ? 'Below Normal' : (($row_pHvalue < 5 || $row_pHvalue > 8) ? 'Above Normal' : 'Normal');
-        $pHValueClass = ($row_pHvalue == 0) ? 'below-normal-label' : (($row_pHvalue < 5 || $row_pHvalue > 8) ? 'above-normal-label' : 'normal-label');
-        ?>
-        <td class="<?php echo $pHValueClass; ?>">
-            <?php echo $pHValueStatus; ?>
-        </td>
-        <td class="<?php echo $status_pHvalue; ?>">
-            <?php echo $status_pHvalue; ?>
-        </td>
-    </tr>
+    <td>pH Value</td>
+<?php
+$pHValueStatus = ($row_pHvalue == 0) ? 'Below Normal' : (($row_pHvalue < 5 || $row_pHvalue > 14) ? 'Outside Normal' : 'Normal');
+$pHValueClass = ($row_pHvalue == 0) ? 'below-normal-label' : (($row_pHvalue < 5 || $row_pHvalue > 14) ? 'above-normal-label' : 'normal-label');
+?>
+<td class="<?php echo $pHValueClass; ?>">
+    <?php echo $pHValueStatus; ?>
+</td>
+<td class="<?php echo $status_pHvalue; ?>">
+    <?php echo $status_pHvalue; ?>
+</td>
+</tr>
     <tr>
     <td>Water Conductivity</td>
 <?php
 if (is_numeric($row_conductivity)) {
     if ($row_conductivity == 0) {
-        $conductivityStatus = 'Below Normal';
-        $conductivityClass = 'below-normal-label';
+        $conductivityStatus = 'Normal';
+        $conductivityClass = 'normal-label';
     } elseif ($row_conductivity < 0.04 || $row_conductivity > 1.00) {
         $conductivityStatus = 'Above Normal';
         $conductivityClass = 'above-normal-label';
