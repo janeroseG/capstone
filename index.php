@@ -25,8 +25,10 @@
 <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Home">
     <meta property="og:type" content="website">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
-  <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-grey-15 u-header" id="sec-6cff"><div class="u-clearfix u-sheet u-sheet-1">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+  <body class="u-body u-xl-mode" data-lang="en">
+    <header class="u-clearfix u-grey-15 u-header" id="sec-6cff"></head>
+  <div class="u-clearfix u-sheet u-sheet-1">
   <a href="index.php" class="Logo u-image u-logo u-image-1">
     <img src="images/agrilogo.png" class="u-logo-image u-logo-image-1" >
 </a>

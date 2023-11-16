@@ -1,7 +1,9 @@
 .u-section-1 .u-sheet-1 {
   min-height: 583px;
 }
-
+  u-logo-image u-logo-image-1{
+    height: auto;
+  }
 .u-section-1 .u-text-1 {
   font-weight: 700;
   font-size: 2.25rem;

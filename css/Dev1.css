@@ -1,0 +1,51 @@
+/* Container holding the image and overlay */
+.image-card {
+  position: relative;
+  width: 200px; /* Adjust width as needed */
+}
+
+/* Image within the card */
+.image-card img {
+  width: 90%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Overlay content */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: .5em;
+  text-align: center;
+}
+
+/* Hover effect */
+.image-card:hover img {
+  transform: scale(1.1);
+}
+
+.image-card:hover .card-overlay {
+  opacity: 1;
+}
+.image-cards-container {
+  display: flex;
+  justify-content: center; /* Align cards in the center horizontally */
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  gap: 20px; /* Adjust spacing between cards */
+}
+.image-cards-container1 {
+  display: flex;
+  justify-content: center; /* Align cards in the center horizontally */
+  gap: 20px; /* Adjust spacing between cards */
+}
+
