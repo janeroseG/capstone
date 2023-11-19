@@ -8,7 +8,7 @@ $dbname = "datalogdb";
 
 $api_key_value = "tPmAT5Ab3j7F9";
 
-$api_key= $sensor = $location = $temperature = $humidity = $temperature1 = $humidity1 = $tempCelsius = $pHvalue =  $conductivity= "";
+$api_key= $sensor = $location = $temperature = $humidity = $temperature1 = $humidity1 = $temperature2 = $tempCelsius = $pHvalue =  $conductivity= "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $api_key = test_input($_POST["api_key"]);
@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $humidity = test_input($_POST["humidity"]);
         $temperature1 = test_input($_POST["temperature1"]);
         $humidity1 = test_input($_POST["humidity1"]);
+        $temperature2 = test_input($_POST["temperature2"]);
         $tempCelsius = test_input($_POST["tempCelsius"]);
         $pHvalue = test_input($_POST["pHvalue"]);
         $conductivity = test_input($_POST["conductivity"]);
@@ -29,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Connection failed: " . $conn->connect_error);
         } 
         
-        $sql = "INSERT INTO sensordata (sensor, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity)
-        VALUES ('" . $sensor . "', '" . $location . "', '" . $temperature . "', '" . $humidity . "','" . $temperature1 . "', '" . $humidity1 . "', '" . $tempCelsius . "','" . $pHvalue . "', '" . $conductivity . "')";
+        $sql = "INSERT INTO sensordata (sensor, location, temperature, humidity, temperature1, humidity1, temperature2, tempCelsius, pHvalue, conductivity)
+        VALUES ('" . $sensor . "', '" . $location . "', '" . $temperature . "', '" . $humidity . "','" . $temperature1 . "', '" . $humidity1 . "','" . $temperature2 . "','" . $tempCelsius . "','" . $pHvalue . "', '" . $conductivity . "')";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";

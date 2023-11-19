@@ -136,7 +136,7 @@ if (selectedDate === "") {
     $totalRecords = $row['total'];
     $totalPages = ceil($totalRecords / $recordsPerPage);
 
-    $sql = "SELECT id, location, temperature, humidity, temperature1, humidity1,tempCelsius,pHvalue,conductivity,reading_time FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+    $sql = "SELECT id, location, temperature, humidity, temperature1, humidity1,temperature2, tempCelsius,pHvalue,conductivity,reading_time FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
  
  
 
@@ -146,8 +146,9 @@ if (selectedDate === "") {
         <th>Date &amp; Time</th> 
         <th>Temperature Outside &deg;C</th> 
         <th>Humidity Outside &#37;</th>
-        <th>Temperature Inside &deg;C</th> 
+        <th>Temperature Inside Right &deg;C</th> 
         <th>Humidity1 Inside &#37;</th>
+        <th>Temperature Inside Left &deg;C</th> 
         <th>Water Temperature &deg;C</th>
         <th>PH level</th>
         <th>Water Conductivity</th> 
@@ -165,6 +166,7 @@ if (selectedDate === "") {
             $row_humidity = $row["humidity"];
             $row_temperature1 = $row["temperature1"];
             $row_humidity1 = $row["humidity1"];
+            $row_temperature2 = $row["temperature2"];
             $row_tempCelsius = $row["tempCelsius"];
             $row_pHvalue = $row["pHvalue"];
             $row_conductivity = $row["conductivity"];
@@ -175,6 +177,7 @@ if (selectedDate === "") {
                 <td>' . $row_humidity . '</td>
                 <td>' . $row_temperature1 . '</td> 
                 <td>' . $row_humidity1 . '</td> 
+                <td>' . $row_temperature2 . '</td> 
                 <td>' . $row_tempCelsius . '</td> 
                 <td>' . $row_pHvalue . '</td> 
                 <td>' . $row_conductivity . '</td>  

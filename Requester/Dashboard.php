@@ -29,8 +29,8 @@ if ($conn->connect_error) {
 }
 
 // Initialize variables
-$avgTemperature = $avgHumidity = $avgTemperature1 = $avgHumidity1 = $avgTempCelsius = $avgPHvalue = $avgConductivity = 0;
-$row_temperature = $row_humidity = $row_temperature1 = $row_humidity1 = $row_tempCelsius = $row_pHvalue = $row_conductivity = 0;
+$avgTemperature = $avgHumidity = $avgTemperature1 = $avgHumidity1 = $avgTemperature2 = $avgTempCelsius = $avgPHvalue = $avgConductivity = 0;
+$row_temperature = $row_humidity = $row_temperature1 = $row_humidity1 = $row_temperature2 = $row_tempCelsius = $row_pHvalue = $row_conductivity = 0;
 
 // Calculate OFFSET value for pagination
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -50,14 +50,14 @@ if ($resultCount) {
 }
 
 // Retrieve data with OFFSET and LIMIT for pagination
-$sqlData = "SELECT id, location, temperature, humidity, temperature1, humidity1, tempCelsius, pHvalue, conductivity, reading_time  FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+$sqlData = "SELECT id, location, temperature, humidity, temperature1, humidity1, temperature2, tempCelsius, pHvalue, conductivity, reading_time  FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
 
 // Assign table values to variables
 $resultData = $conn->query($sqlData);
 
 if ($resultData) {
     // Variables to store sum for averaging
-    $sumTemperature = $sumHumidity = $sumTemperature1 = $sumHumidity1 = $sumTempCelsius = $sumPHvalue = $sumConductivity = $rowCount = 0;
+    $sumTemperature = $sumHumidity = $sumTemperature1 = $sumHumidity1 = $sumTemperature2 = $sumTempCelsius = $sumPHvalue = $sumConductivity = $rowCount = 0;
 
     while ($row = $resultData->fetch_assoc()) {
         // Check if the data exists before accessing it
@@ -65,6 +65,7 @@ if ($resultData) {
         $row_humidity = $row["humidity"];
         $row_temperature1 = $row["temperature1"];
         $row_humidity1 =$row["humidity1"];
+        $row_temperature2 = $row["temperature2"];
         $row_tempCelsius = $row["tempCelsius"];
         $row_pHvalue = $row["pHvalue"];
         $row_conductivity = $row["conductivity"];
@@ -74,7 +75,8 @@ if ($resultData) {
         $status_humidity = (is_numeric($row_humidity) && !is_nan(floatval($row_humidity)) && $row_humidity != 0) ? "active" : "not-active";
         $status_temperature1 = (is_numeric($row_temperature1) && !is_nan(floatval($row_temperature1)) && $row_temperature1 != 0) ? "active" : "not-active";
         $status_humidity1 = (is_numeric($row_humidity1) && !is_nan(floatval($row_humidity1)) && $row_humidity1 != 0) ? "active" : "not-active";
-        
+        $status_temperature2 = (is_numeric($row_temperature2) && !is_nan(floatval($row_temperature2)) && $row_temperature2 != 0) ? "active" : "not-active";
+
         $status_tempCelsius = ($row_tempCelsius != 0) ? "active" : "not-active";
         $status_pHvalue = ($row_pHvalue != 0) ? "active" : "not-active";
         $status_conductivity = ($row_conductivity != 0) ? "active" : "not-active";
@@ -84,6 +86,7 @@ if ($resultData) {
         $sumHumidity = 0;
         $sumTemperature1 = 0;
         $sumHumidity1 = 0;
+        $sumTemperature2 = 0;
         $sumTempCelsius = 0;
         $sumPHvalue = 0;
         $sumConductivity = 0;
@@ -94,6 +97,7 @@ if ($resultData) {
             $row_temperature = isset($row["temperature"]) ? $row["temperature"] : 0;
             $row_humidity = isset($row["humidity"]) ? $row["humidity"] : 0;
             $row_temperature1 = isset($row["temperature1"]) ? $row["temperature1"] : 0;
+            $row_temperature2 = isset($row["temperature2"]) ? $row["temperature2"] : 0;
             $row_humidity1 = isset($row["humidity1"]) ? $row["humidity1"] : 0;
             $row_tempCelsius = isset($row["tempCelsius"]) ? $row["tempCelsius"] : 0;
             $row_pHvalue = isset($row["pHvalue"]) ? $row["pHvalue"] : 0;
@@ -108,6 +112,9 @@ if ($resultData) {
             }
             if (is_numeric($row_temperature1)) {
                 $sumTemperature1 += $row_temperature1;
+            }
+            if (is_numeric($row_temperature2)) {
+                $sumTemperature2 += $row_temperature2;
             }
             if (is_numeric($row_humidity1)) {
                 $sumHumidity1 += $row_humidity1;
@@ -132,6 +139,7 @@ if ($resultData) {
     $avgHumidity = $sumHumidity / $rowCount;
     $avgTemperature1 = $sumTemperature1 / $rowCount;
     $avgHumidity1 = $sumHumidity1 / $rowCount;
+    $avgTemperature2 = $sumTemperature2 / $rowCount;
     $avgTempCelsius = $sumTempCelsius / $rowCount;
     $avgPHvalue = $sumPHvalue / $rowCount;
     $avgConductivity = $sumConductivity / $rowCount;
@@ -171,10 +179,11 @@ $conn->close();
                         indexLabelFontSize: 16,
                         indexLabelPlacement: "outside",
                         dataPoints: [
-                            { label: "Temperature", y: <?php echo $avgTemperature; ?> },
+                            { label: "Temperature Right", y: <?php echo $avgTemperature; ?> },
+                            { label: "Temperature Left", y: <?php echo $avgTemperature2; ?> },
                             { label: "Humidity", y: <?php echo $avgHumidity; ?> },
-                            { label: "Temperature1", y: <?php echo $avgTemperature1; ?> },
-                            { label: "Humidity1", y: <?php echo $avgHumidity1; ?> },
+                            { label: "Temperature Outside", y: <?php echo $avgTemperature1; ?> },
+                            { label: "Humidity Outside", y: <?php echo $avgHumidity1; ?> },
                             { label: "TempCelsius", y: <?php echo $avgTempCelsius; ?> },
                             { label: "pHValue", y: <?php echo $avgPHvalue; ?> },
                             { label: "Conductivity", y: <?php echo $avgConductivity; ?> }
@@ -190,10 +199,16 @@ $conn->close();
             <h1><strong>Latest Reading</strong></h1>
         </div>
         <div class="boxes">
+        <div class="box box1">
+                <i class="uil uil-temperature"></i>
+                <span class="text">Temperature</span>
+                <span class="text">Inside Left</span>
+                <span class="number"><?php echo $row_temperature2; ?></span>
+            </div>
             <div class="box box1">
                 <i class="uil uil-temperature"></i>
                 <span class="text">Temperature</span>
-                <span class="text">Inside</span>
+                <span class="text">Inside Right</span>
                 <span class="number"><?php echo $row_temperature; ?></span>
             </div>
             <div class="box box2">
@@ -245,7 +260,28 @@ $conn->close();
         <th>Connectivity</th>
     </tr>
     <tr>
-    <td>Temperature</td>
+        
+    <td>Temperature Left</td>
+        <?php
+        if (is_numeric($row_temperature2)) {
+            $temperature2Status = ($row_temperature2 == 0) ? 'Below Normal' : ($row_temperature2 > 45 ? 'Above Normal' : 'Normal');
+            $temperature2Class = ($row_temperature2 == 0) ? 'below-normal-label' : ($row_temperature2 > 45 ? 'above-normal-label' : 'normal-label');
+        } else {
+            // Handle NaN or non-numeric values as "Not Normal"
+            $temperature2Status = 'Not Normal';
+            $temperature2Class = 'not-normal-label';
+        }
+        ?>
+        <td class="<?php echo $temperatur2eClass; ?>">
+            <?php echo $temperature2Status; ?>
+        </td>
+        <td class="<?php echo $status_temperature2; ?>">
+            <?php echo $status_temperature2; ?>
+        </td>
+        </tr>
+    <tr>
+
+    <td>Temperature Right</td>
         <?php
         if (is_numeric($row_temperature)) {
             $temperatureStatus = ($row_temperature == 0) ? 'Below Normal' : ($row_temperature > 35 ? 'Above Normal' : 'Normal');
@@ -284,7 +320,7 @@ $conn->close();
         </td>
         </tr>
     <tr>
-        <td>Temperature1</td>
+        <td>Temperature Outside</td>
         <?php
         if (is_numeric($row_temperature1)) {
             $temperature1Status = ($row_temperature1 == 0) ? 'Below Normal' : ($row_temperature1 > 45 ? 'Above Normal' : 'Normal');
@@ -303,6 +339,7 @@ $conn->close();
         </td>
         </tr>
     <tr>
+
         <td>Humidity1</td>
         <?php
         if (is_numeric($row_humidity1)) {
