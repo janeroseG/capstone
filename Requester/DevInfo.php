@@ -54,13 +54,13 @@ if ($_SESSION['is_login']) {
 <hr></hr>
 <div class="image-cards-container1">
 <div class="image-card">
-<img src="../images/katlene.png" alt="Katlene" class="bottom-image">
+<img src="../images/p1.png" alt="Katlene" class="bottom-image">
   <div class="card-overlay">
   <h2>Project Adviser</h2>
   </div>
 </div>
 <div class="image-card">
-<img src="../images/katlene.png" alt="Katlene" class="bottom-image">
+<img src="../images/p1.png" alt="Katlene" class="bottom-image">
   <div class="card-overlay">
   <h2>Project Owner</h2>
   </div>

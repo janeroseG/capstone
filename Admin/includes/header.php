@@ -35,6 +35,7 @@
                 <li class="nav-item"><a class="nav-link <?php if(PAGE == 'requesters'){echo 'active';} ?>" href="requester.php"><i class="fas fa-users"style= "margin-right: 10px;"> </i>Requests</a></li>
                 <li class="nav-item"><a class="nav-link <?php if(PAGE == 'history'){echo 'active';} ?>" href="history.php"><i class="fas fa-history"style= "margin-right: 10px;"> </i>History</a></li>
                 <li class="nav-item"><a class="nav-link <?php if(PAGE == 'latest'){echo 'active';} ?>" href="latest.php"><i class="fas fa-chart-bar" style= "margin-right: 10px;"> </i>Latest Record</a></li>
+                <li class="nav-item"><a class="nav-link <?php if(PAGE == 'cloud'){echo 'active';} ?>" href="cloud.php"><i class="fas fa-cloud" style= "margin-right: 10px;"> </i>Connect to Cloud</a></li>
                 <li class="nav-item"><a class="nav-link" href="../logout.php"><i class="fas fa-sign-out-alt" style= "margin-right: 10px;"></i>Logout</a></li>
         </ul>
         </div>

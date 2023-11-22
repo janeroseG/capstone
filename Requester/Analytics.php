@@ -39,7 +39,7 @@ if ($conn->connect_error) {
 $sql = "SELECT COUNT(*) AS total FROM sensordata";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$sql = "SELECT id, location, temperature, humidity, temperature1, humidity1, reading_time , tempCelsius,pHvalue, conductivity FROM  sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
+$sql = "SELECT id, location, temperature, humidity, temperature1, humidity1, temperature2, humidity2, reading_time , tempCelsius,pHvalue, conductivity FROM  sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
 //Variables
 $dataPoints = array();
 $dataPoints2 = array();
@@ -53,6 +53,8 @@ if ($result = $conn->query($sql)) {
         $row_humidity = $row["humidity"];
         $row_temperature2 = $row["temperature1"];
         $row_humidity2 = $row["humidity1"];
+        $row_temperature2 = $row["temperature2"];
+        $row_humidity2 = $row["humidity2"];
 
         $row_tempCelsius = $row["tempCelsius"];
         $row_conductivity = $row["conductivity"];
@@ -63,6 +65,9 @@ if ($result = $conn->query($sql)) {
 
         $dataPoints2[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature2, "name" => "Temperature2");
         $dataPoints2h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity2, "name" => "Humidity2");
+        $dataPoints5[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature2, "name" => "Temperature3");
+        $dataPoints5h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity2, "name" => "Humidity3");
+
         $dataPoints4[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_conductivity, "name" => "conductivity");
        
 
@@ -130,51 +135,74 @@ window.onload = function () {
     chart.render();
 
     var chart2 = new CanvasJS.Chart("chartContainer2", {
-        backgroundColor: "#D9D9D9",
-        animationEnabled: true,
-        title: {
-        text: "Temperature2 and Humidity2 Outside",
+    backgroundColor: "#D9D9D9",
+    animationEnabled: true,
+    title: {
+        text: "Temperature2 and Humidity2 Inside",
         fontFamily: "Roboto, sans-serif" 
     },
-        axisY: {
-            title: "Temperature2 / Humidity2",
-            valueFormatString: "#0.##",
-            suffix: "Cel",
-            prefix: ""
-        },
-        axisX: {
-            title: "Time",
-            valueFormatString: "h:mm TT", // Format time as 12-hour with AM/PM
-            interval: 120, // Set interval to 2 hours (120 minutes)
-            intervalType: "minute",
-            labelAngle: -45, // Rotate labels for better readability (optional)
-            timeZoneOffset: new Date().getTimezoneOffset()
-        },
-        data: [{
-            type: "spline",
-            markerSize: 5,
-            xValueFormatString: "h:mm TT",
-            yValueFormatString: "#0.##",
-            xValueType: "dateTime",
-            dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>,
-            showInLegend: true,
-            legendText: "{name}",
-            color: "green", // Set color as green for temperature2
-            markerColor: "green" // Set marker color as green for temperature2
-        }, {
-            type: "spline",
-            markerSize: 5,
-            xValueFormatString: "h:mm TT",
-            yValueFormatString: "#0.##",
-            xValueType: "dateTime",
-            dataPoints: <?php echo json_encode($dataPoints2h, JSON_NUMERIC_CHECK); ?>,
-            showInLegend: true,
-            legendText: "{name}",
-            color: "purple", // Set color as purple for humidity2
-            markerColor: "purple" // Set marker color as purple for humidity2
-        }]
-    });
-    chart2.render();
+    axisY: {
+        title: "Temperature2 / Humidity2",
+        valueFormatString: "#0.##",
+        suffix: "Cel",
+        prefix: ""
+    },
+    axisX: {
+        title: "Time",
+        valueFormatString: "h:mm TT", // Format time as 12-hour with AM/PM
+        interval: 120, // Set interval to 2 hours (120 minutes)
+        intervalType: "minute",
+        labelAngle: -45, // Rotate labels for better readability (optional)
+        timeZoneOffset: new Date().getTimezoneOffset()
+    },
+    data: [{
+        type: "spline",
+        markerSize: 5,
+        xValueFormatString: "h:mm TT",
+        yValueFormatString: "#0.##",
+        xValueType: "dateTime",
+        dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>,
+        showInLegend: true,
+        legendText: "{name}",
+        color: "green", // Set color as green for temperature2
+        markerColor: "green" // Set marker color as green for temperature2
+    }, {
+        type: "spline",
+        markerSize: 5,
+        xValueFormatString: "h:mm TT",
+        yValueFormatString: "#0.##",
+        xValueType: "dateTime",
+        dataPoints: <?php echo json_encode($dataPoints2h, JSON_NUMERIC_CHECK); ?>,
+        showInLegend: true,
+        legendText: "{name}",
+        color: "purple", // Set color as purple for humidity2
+        markerColor: "purple" // Set marker color as purple for humidity2
+    }, {
+        type: "spline",
+        markerSize: 5,
+        xValueFormatString: "h:mm TT",
+        yValueFormatString: "#0.##",
+        xValueType: "dateTime",
+        dataPoints: <?php echo json_encode($dataPoints5, JSON_NUMERIC_CHECK); ?>,
+        showInLegend: true,
+        legendText: "{name}",
+        color: "blue", // Set color for Temperature3
+        markerColor: "blue" // Set marker color for Temperature3
+    }, {
+        type: "spline",
+        markerSize: 5,
+        xValueFormatString: "h:mm TT",
+        yValueFormatString: "#0.##",
+        xValueType: "dateTime",
+        dataPoints: <?php echo json_encode($dataPoints5h, JSON_NUMERIC_CHECK); ?>,
+        showInLegend: true,
+        legendText: "{name}",
+        color: "red", // Set color for Humidity3
+        markerColor: "red" // Set marker color for Humidity3
+    }]
+});
+chart2.render();
+
     
     var chart3 = new CanvasJS.Chart("chartContainer3", {
         backgroundColor: "#D9D9D9",
