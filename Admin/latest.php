@@ -7,11 +7,10 @@ include('includes/header.php');
 include('../dbConnection.php');
 session_start();
 
-if ($_SESSION['is_login']) {
-    $rEmail = $_SESSION['rEmail'];
+if(isset($_SESSION['is_adminlogin'])){
+    $aEmail = $_SESSION['aEmail'];
 } else {
-    echo "<script> location.href='RequesterLogin.php'</script>";
-    exit();
+    echo "<script> location.href='login.php'</script>";
 }
 
 $servername = "localhost";
