@@ -16,7 +16,6 @@ if (isset($_SESSION['rEmail'])) {
     header("Location: RequesterLogin.php");
     die();
 }
-
 if (isset($_POST['submit'])) {
     $rName = $_POST['rName'];
     $rEmail = $_POST['rEmail'];
@@ -57,6 +56,44 @@ if (isset($_POST['submit'])) {
                 } else {
                     $msg = "<div class='alert alert-danger'>Registration successful, but email sending failed. Please contact support to verify your email.</div>";
                 }
+
+                // Create an array with the data you want to push to Firebase
+$dataToFirebase = [
+    'r_name' => $rName,
+    'r_email' => $rEmail,
+    'r_password' => $hashedPassword,
+    'verification_token' => $verificationToken
+];
+
+// Convert data to JSON format
+$jsonData = json_encode($dataToFirebase);
+
+// Firebase Realtime Database URL with node specified
+$firebaseUrl = 'https://agrictu-default-rtdb.firebaseio.com/requesterlogin_tb.json';
+
+// Initialize cURL session
+$ch = curl_init($firebaseUrl);
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); // Use POST method to push data
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+// Execute cURL session
+$response = curl_exec($ch);
+
+// Close cURL session
+curl_close($ch);
+
+// Handle response from Firebase (check if data is pushed successfully)
+if ($response !== false) {
+    // Data pushed successfully
+    // Your success message or further actions here
+} else {
+    // Failed to push data
+    // Your error message or handling here
+}
+
             } else {
                 $msg = "<div class='alert alert-danger'>Registration failed. Please try again later.</div>";
             }

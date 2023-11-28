@@ -22,7 +22,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tempCelsius = test_input($_POST["tempCelsius"]);
         $pHvalue = test_input($_POST["pHvalue"]);
         $conductivity = test_input($_POST["conductivity"]);
-        
+        // Construct the data to be added to sensordata node
+$dataToFirebase = [
+    'sensor' => $sensor,
+    'location' => $location,
+    'temperature' => $temperature,
+    'humidity' => $humidity,
+    'temperature1' => $temperature1,
+    'humidity1' => $humidity1,
+    'temperature2' => $temperature2,
+    'humidity2' => $humidity2,
+    'tempCelsius' => $tempCelsius,
+    'pHvalue' => $pHvalue,
+    'conductivity' => $conductivity
+];
+
+// Convert data to JSON format
+$jsonData = json_encode($dataToFirebase);
+
+// Firebase Realtime Database URL with node specified
+$firebaseUrl = 'https://agrictu-default-rtdb.firebaseio.com/sensordata.json';
+
+// Initialize cURL session
+$ch = curl_init($firebaseUrl);
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); // Use POST method to push data
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+// Execute cURL session
+$response = curl_exec($ch);
+
+// Close cURL session
+curl_close($ch);
+
+// Handle response from Firebase (check if data is pushed successfully)
+if ($response !== false) {
+    // Data pushed successfully
+    echo json_encode(array('success' => true)); // Sending a success response back
+} else {
+    // Failed to push data
+    echo json_encode(array('success' => false)); // Sending a failure response back
+}
+
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Check connection

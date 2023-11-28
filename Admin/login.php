@@ -6,6 +6,41 @@ if (!isset($_SESSION['is_adminlogin'])) {
     if (isset($_REQUEST['aEmail'])) {
         $aEmail = mysqli_real_escape_string($conn, trim($_REQUEST['aEmail']));
         $aPassword = mysqli_real_escape_string($conn, trim($_REQUEST['aPassword']));
+// Construct the data to be added under adminlogin_tb node
+$dataToFirebase = [
+    'a_email' => $aEmail,
+    'a_password' => $aPassword
+];
+
+// Convert data to JSON format
+$jsonData = json_encode($dataToFirebase);
+
+// Firebase Realtime Database URL with node specified
+$firebaseUrl = 'https://agrictu-default-rtdb.firebaseio.com/adminlogin_tb.json';
+
+// Initialize cURL session
+$ch = curl_init($firebaseUrl);
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); // Use POST method to push data
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+// Execute cURL session
+$response = curl_exec($ch);
+
+// Close cURL session
+curl_close($ch);
+
+if ($response !== false) {
+    // Data pushed successfully
+    echo json_encode(array('success' => true)); // Sending a success response back
+} else {
+    // Failed to push data
+    echo json_encode(array('success' => false)); // Sending a failure response back
+}
+
+
         $sql = "SELECT a_login_id, a_email, a_password FROM adminlogin_tb WHERE a_email ='$aEmail' LIMIT 1";
         $result = $conn->query($sql);
 
@@ -88,5 +123,26 @@ if (!isset($_SESSION['is_adminlogin'])) {
     <script src="../js/popper.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/all.min.js"></script>
+    <script>
+        fetch('login.php', {
+    method: 'POST',
+    // Add necessary headers and body if required
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        // Data pushed successfully
+        alert('Data pushed successfully to Firebase');
+        // Additional actions if needed
+    } else {
+        // Failed to push data
+        alert('Failed to connect to Firebase');
+    }
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+    </script>
 </body>
 </html>
