@@ -101,7 +101,9 @@ if ($response !== false) {
             $msg = "<div class='alert alert-danger'>Password and Confirm Password do not match.</div>";
         }
     }
+    
 }
+
 
 // Function to generate a random verification token
 function generateVerificationToken($length = 64) {
