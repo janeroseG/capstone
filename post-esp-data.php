@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tempCelsius = test_input($_POST["tempCelsius"]);
         $pHvalue = test_input($_POST["pHvalue"]);
         $conductivity = test_input($_POST["conductivity"]);
+
         // Construct the data to be added to sensordata node
 $dataToFirebase = [
     'sensor' => $sensor,
