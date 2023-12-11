@@ -79,19 +79,14 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); // Use POST method to push data
 curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 
-// Execute cURL session
 $response = curl_exec($ch);
 
-// Close cURL session
 curl_close($ch);
 
-// Handle response from Firebase (check if data is pushed successfully)
 if ($response !== false) {
-    // Data pushed successfully
-    // Your success message or further actions here
+    
 } else {
-    // Failed to push data
-    // Your error message or handling here
+   
 }
 
             } else {

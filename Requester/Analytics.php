@@ -250,7 +250,7 @@ chart2.render();
     },
         axisY: {
             title: "pH/Temperature",
-            //valueFormatString: "#0.##",
+            valueFormatString: "#0.##",
             suffix: "Cel",
             prefix: ""
         },

@@ -27,7 +27,8 @@
     <!--  Start Container -->
     <div class="container-fluid" style="margin-top:50px;">
     <div class="row">   <!--  Start Row -->
-    <nav class="col-sm-2 col-md-3 col-lg-2 bg-gray sidebar py-5 d-print-none"> <!-- Side Bar 1st Column -->
+    <nav class="col-sm-2 col-md-3 col-lg-2 bg-gray sidebar py-5 d-print-none">
+       <!-- Side Bar 1st Column -->
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link <?php if(PAGE == 'dashboard'){echo 'active';} ?>" href="dashboard.php"><i class="fas fa-tachometer-alt"  style= "margin-right: 10px;"> </i>Dashboard</a></li>
