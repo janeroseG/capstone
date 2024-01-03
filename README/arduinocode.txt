@@ -1,0 +1,261 @@
+#ifdef ESP32
+#include <WiFi.h>
+#include <HTTPClient.h>
+#else
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#include <base64.h>
+#include <WiFiClient.h>
+#endif
+
+#include <DHT.h>
+#include <Wire.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+
+// Twilio Account SID and Auth Token
+const char* accountSID = "AC4452870f01bb0a28296687cd6a6418fc";
+const char* authToken = "0445d712aee52ba13fde803ebca6163b";
+// Twilio Phone Number (Sender)
+const char* twilioPhoneNumber = "+19136745677";
+const char* recipientPhoneNumber = "+639913775322"; // recipient phone number
+
+//phlevel
+float resolution;
+int measurings;
+float voltage;
+float pHvalue;
+float b = 0.00;
+float m = 2.0;
+
+const char* ssid = "PLDTHOMEFIBR88908";
+const char* password = "PLDTWIFIy29hs-123";
+const char* serverName = "http://192.168.1.4/ProjectSystem_v2/post-esp-data.php";
+const char* server = "api.thingspeak.com";
+String apiKeyValue = "tPmAT5Ab3j7F9";
+String sensorName = "Agri";
+String sensorLocation = "Agri";
+
+// DHT11 Sensor for inside
+#define DHTPIN_INSIDE D2
+#define DHTTYPE_INSIDE DHT22
+DHT dht_inside(DHTPIN_INSIDE, DHTTYPE_INSIDE);
+
+#define DHTPIN_INSIDE_2 D3 
+#define DHTTYPE_INSIDE_2 DHT22 
+DHT temperature_2(DHTPIN_INSIDE_2, DHTTYPE_INSIDE_2);
+
+// DHT11 Sensor for outside
+#define DHTPIN_OUTSIDE D4
+#define DHTTYPE_OUTSIDE DHT11
+DHT dht_outside(DHTPIN_OUTSIDE, DHTTYPE_OUTSIDE);
+
+// DS18B20 Temperature Sensor
+const int SENSOR_PIN = D5; //water
+OneWire oneWire(SENSOR_PIN);         // setup a oneWire instance
+DallasTemperature tempSensor(&oneWire); // pass oneWire to DallasTemperature library
+int buzzerPin = D7;//buzzer
+const int analogPin = D0; //ph
+const float VREF = 3.0;
+const int CONDUCTIVITY_PIN = A0;
+const float CALIBRATION_FACTOR = 1.0;
+WiFiClient client;
+HTTPClient http;
+int relayPin2 = D8;
+int relayPin = D6;
+
+float temperature; // DHT11 temperature
+float humidity; // DHT11 humidity
+
+float temperature1; // First DHT22 temperature
+float humidity1; // First DHT22 humidity
+
+float temperature2; // Second DHT22 temperature
+float humidity2; // Second DHT22 humidity
+
+float tempCelsius;
+float tempFahrenheit;
+float conductivity;
+ 
+
+void setupWiFi() {
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.print("Connected to WiFi network with IP Address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void setupSensors() {
+  dht_inside.begin();
+  temperature_2.begin();
+  dht_outside.begin();
+  tempSensor.begin();
+}
+
+void setupRelayAndBuzzer() {
+  pinMode(relayPin, OUTPUT);
+  digitalWrite(relayPin, HIGH); // Initially turn the relay off
+  pinMode(buzzerPin, OUTPUT);
+}
+void setupRelay2() {
+  pinMode(relayPin2, OUTPUT);
+  digitalWrite(relayPin2, HIGH); 
+}
+void beep() {
+  for (int i = 0; i < 3; i++) {
+    // Turn the buzzer on
+    digitalWrite(buzzerPin, HIGH);
+    delay(500); // Buzz for 0.5 seconds
+
+    // Turn the buzzer off
+    digitalWrite(buzzerPin, LOW);
+    delay(500); // Wait for 0.5 seconds
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  setupWiFi();
+  setupSensors();
+  setupRelayAndBuzzer();
+   setupRelay2();
+}
+
+void readDHTSensorValues() {
+  temperature = dht_inside.readTemperature();
+  humidity = dht_inside.readHumidity();
+  temperature1 = dht_outside.readTemperature();
+  humidity1 = dht_outside.readHumidity();
+  temperature2 = temperature_2.readTemperature(); // Read temperature from the third sensor
+  humidity2 = temperature_2.readHumidity();
+
+  if (isnan(temperature1) || isnan(humidity1) || isnan(temperature) || isnan(humidity)) {
+    //sendSensorErrorSMS();
+  }
+if (temperature >= 40 && temperature2 >= 40) {
+      digitalWrite(relayPin, HIGH); // Turn on relay
+    } else if (temperature > temperature1 && temperature2 > temperature1) {
+      // Alert condition
+      //sendAlert();
+      beep();
+      delay(1000);
+      digitalWrite(relayPin, HIGH); // Turn on relay
+    } else {
+      digitalWrite(relayPin, LOW); // Turn off relay
+    }
+}
+
+
+void WaterTemp(){
+   // Water temperature computation
+    tempSensor.requestTemperatures();
+    tempCelsius = tempSensor.getTempCByIndex(0);
+    tempFahrenheit = tempCelsius * 9 / 5 + 32;
+
+    // Check water temperature levels
+    if (isnan(tempCelsius)) {
+      // Send an alert indicating that water temperature is not working
+      //sendWaterTemperatureErrorSMS();
+    } else if (tempCelsius > 35.0) {
+      beep();
+      delay(1000);
+      digitalWrite(relayPin2, HIGH);
+      //sendWaterTemperatureAboveNormalAlert(tempCelsius);
+    } else {
+      digitalWrite(relayPin2, LOW);
+    }
+}
+
+void Conductivityread(){
+   // Conductivity computation
+    int sensorValue = analogRead(CONDUCTIVITY_PIN);
+    Serial.print("sensorValue: ");
+    Serial.println(sensorValue);
+    float voltage = (sensorValue / 1023.0) * VREF;
+    // Calculate the conductivity in microsiemens per centimeter (uS/cm)
+    float conductivity = voltage * CALIBRATION_FACTOR;
+    // Print the conductivity value on the serial monitor
+    Serial.print("Water Conductivity: ");
+    Serial.println(conductivity);
+
+    // Check conductivity levels
+    if (conductivity == 0.00) {
+      // Send an alert indicating that conductivity is not working
+      //sendConductivityErrorSMS();
+    } else if (conductivity > 1.50) {
+      beep();
+      delay(1000);
+      digitalWrite(relayPin, HIGH);
+      //sendConductivityAboveNormalAlert(conductivity);
+    } else {
+      digitalWrite(relayPin, LOW);
+    }
+}
+void phread(){
+   // pH value computation
+    measurings = 0;
+    for (int i = 0; i < 10; i++) {
+      measurings = measurings + analogRead(D0);
+      delay(10);
+    }
+    voltage = ((5 / resolution) * (measurings / 10));
+    pHvalue = ((7 + ((2.5 - voltage) / m))) + b;
+
+    Serial.print("pH= ");
+    Serial.println(pHvalue);
+
+    // Check pH value
+    if (isnan(pHvalue)) {
+      //sendphSensorErrorSMS();
+    } else if (pHvalue > 8.5) {
+      //sendPHAlert(pHvalue);
+      beep();
+      delay(1000);
+      digitalWrite(relayPin, HIGH);
+    } else {
+      digitalWrite(relayPin, LOW);
+    }
+
+}
+void sendHTTPRequest(String data) {
+  if (WiFi.status() == WL_CONNECTED) {
+    http.begin(client, serverName);
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    int httpResponseCode = http.POST(data);
+
+    if (httpResponseCode > 0) {
+      Serial.print("HTTP Response code: ");
+      Serial.println(httpResponseCode);
+    } else {
+      Serial.print("Error code: ");
+      Serial.println(httpResponseCode);
+    }
+    http.end();
+  }
+}
+void loop() {
+  if (WiFi.status() == WL_CONNECTED) {
+    // Reading DHT sensor values and sending HTTP request
+    readDHTSensorValues();
+    WaterTemp();
+    Conductivityread();
+    phread();
+
+    String httpRequestData = "api_key=" + apiKeyValue + "&sensor=" + sensorName +
+                             "&location=" + sensorLocation + "&temperature=" + String(temperature) +
+                             "&humidity=" + String(humidity) + "&temperature1=" + String(temperature1) +
+                             "&humidity1=" + String(humidity1) + "&temperature2=" + String(temperature2) +
+                             "&humidity2=" + String(humidity2) + "&tempCelsius=" + String(tempCelsius) +
+                             "&pHvalue=" + String(pHvalue) + "&conductivity=" + String(conductivity);
+    sendHTTPRequest(httpRequestData);
+  } else {
+    Serial.println("WiFi Disconnected");
+  }
+  delay(1000);
+}

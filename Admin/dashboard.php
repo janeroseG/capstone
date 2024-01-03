@@ -26,7 +26,8 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $totalnotaccepted = $row['total_not_accepted'];
 ?>
-<div class="col-sm-9 col-md-10">   <!-- Start Dashboard  2nd Column -->
+<div class="col-sm-12 col-md-10" style="margin-top: 30px; left: 230px;">
+
     <div class="row text-center mx-5">
         <div class="col-sm-4 mt-5">
             <div class="card text-white bg-danger mb-3" style="max-width:18rem;">

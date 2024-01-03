@@ -16,7 +16,6 @@ if (isset($_SESSION['rEmail'])) {
     header("Location: RequesterLogin.php");
     die();
 }
-
 if (isset($_POST['submit'])) {
     $rName = $_POST['rName'];
     $rEmail = $_POST['rEmail'];
@@ -57,6 +56,39 @@ if (isset($_POST['submit'])) {
                 } else {
                     $msg = "<div class='alert alert-danger'>Registration successful, but email sending failed. Please contact support to verify your email.</div>";
                 }
+
+                // Create an array with the data you want to push to Firebase
+$dataToFirebase = [
+    'r_name' => $rName,
+    'r_email' => $rEmail,
+    'r_password' => $hashedPassword,
+    'verification_token' => $verificationToken
+];
+
+// Convert data to JSON format
+$jsonData = json_encode($dataToFirebase);
+
+// Firebase Realtime Database URL with node specified
+$firebaseUrl = 'https://agrictu-default-rtdb.firebaseio.com/requesterlogin_tb.json';
+
+// Initialize cURL session
+$ch = curl_init($firebaseUrl);
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); // Use POST method to push data
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+$response = curl_exec($ch);
+
+curl_close($ch);
+
+if ($response !== false) {
+    
+} else {
+   
+}
+
             } else {
                 $msg = "<div class='alert alert-danger'>Registration failed. Please try again later.</div>";
             }
@@ -64,7 +96,9 @@ if (isset($_POST['submit'])) {
             $msg = "<div class='alert alert-danger'>Password and Confirm Password do not match.</div>";
         }
     }
+    
 }
+
 
 // Function to generate a random verification token
 function generateVerificationToken($length = 64) {
@@ -195,7 +229,7 @@ function isVerificationLinkValid($verificationLink) {
                             <li id='lower'> Atleast one lowercase</li>
                             <li id='special_char'> Atleast one special symbol</li>
                             <li id='number'> Atleast one number</li>
-                         <li id='length'> Make your password atleast 6-8 character</li>
+                            <li id='length'> Make your password atleast 6-8 character</li>
                         </ul>
 
                         <div class="input-box">

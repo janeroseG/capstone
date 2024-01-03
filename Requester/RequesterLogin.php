@@ -50,8 +50,6 @@ if (!isset($_SESSION['is_login'])) {
 } else {
     echo "<script> location.href='SubmitRequest.php';</script>";
 }
-
-
 ?>
 
 <!DOCTYPE html>

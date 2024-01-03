@@ -1,49 +1,51 @@
-h1 {
-    padding-top: 10px;
-    text-align: center;
-    font-weight: bold;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  
-  .feature-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-    padding-top: 75px;
-  }
-  .feature1-container{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    padding: 20px;
-    padding-top: 75px;
-    padding-left: 300px;
-  }
-  
-  .feature {
-    text-align: center;
-    margin: 0 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .feature1 {
-    text-align: center;
-    margin: 0 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .feature p, .feature1 p {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .bottom-image {
-    width: 150px;
-    margin: 10px;
-  }
-  
+/* Container holding the image and overlay */
+.image-card {
+  position: relative;
+  width: 200px; /* Adjust width as needed */
+}
+
+/* Image within the card */
+.image-card img {
+  width: 90%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Overlay content */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: .5em;
+  text-align: center;
+}
+
+/* Hover effect */
+.image-card:hover img {
+  transform: scale(1.1);
+}
+
+.image-card:hover .card-overlay {
+  opacity: 1;
+}
+.image-cards-container {
+  display: flex;
+  justify-content: center; /* Align cards in the center horizontally */
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  gap: 20px; /* Adjust spacing between cards */
+}
+.image-cards-container1 {
+  display: flex;
+  justify-content: center; /* Align cards in the center horizontally */
+  gap: 20px; /* Adjust spacing between cards */
+}
 
