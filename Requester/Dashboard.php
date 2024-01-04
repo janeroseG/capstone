@@ -151,7 +151,8 @@ if ($resultData) {
 $conn->close();
 ?>
 
-<div class="col-sm-12 col-md-10" style="margin-top: 30px; left: 190px;">
+
+<div class="col-sm-12 col-md-10" style="margin-top: 30px; left: 230px;">
     <!DOCTYPE HTML>
     <html>
     <head>
@@ -194,10 +195,10 @@ $conn->close();
             }
         </script>
     </head>
-    
     <body>
-    <div class="col-sm-12 col-md-10" style="left: 20px;">
-
+        <div class="latest" style="text-align: center;">
+            <h1><strong>Latest Reading</strong></h1>
+        </div>
         <div class="boxes">
         <div class="box box1">
                 <i class="uil uil-temperature"></i>
@@ -250,10 +251,10 @@ $conn->close();
             </div>
         </div>
 
-        <div class="container" style="height: 320px; width: 200%;">
-        <div id="chartContainer" style="height: 320px; padding-right: 10px; width: 70%; margin-bottom: 20px;"></div>
+        <div class="container">
+        <div id="chartContainer" style="height: 320px; width: 50%; padding-right: 10px; margin-bottom: 20px;"></div>
 <!-- Normal and Above Normal Sensors Table -->
-<table id="normal-above-normal-sensors" style="height: 170px; padding-left: 100px; width:80%; margin-left: 10px; margin-bottom: 20px;padding padding-right: 90px">
+<table id="normal-above-normal-sensors" style="height: 170px; width: 50%; padding-left: 30px; padding-right: 10px; margin-left: 20px; margin-bottom: 20px;">
     <tr>
         <th>Sensor</th>
         <th>Status</th>
@@ -402,7 +403,6 @@ if (is_numeric($row_conductivity)) {
     $conductivityStatus = 'Not Normal';
     $conductivityClass = 'not-normal-label';
 }
-
 ?>
 <td class="<?php echo $conductivityClass; ?>">
     <?php echo $conductivityStatus; ?>

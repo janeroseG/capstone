@@ -51,8 +51,8 @@ if ($result = $conn->query($sql)) {
     while ($row = $result->fetch_assoc()) {
         $row_temperature = $row["temperature"];
         $row_humidity = $row["humidity"];
-        $row_temperature2 = $row["temperature1"];
-        $row_humidity2 = $row["humidity1"];
+        $row_temperature1 = $row["temperature1"];
+        $row_humidity1 = $row["humidity1"];
         $row_temperature2 = $row["temperature2"];
         $row_humidity2 = $row["humidity2"];
 
@@ -63,10 +63,10 @@ if ($result = $conn->query($sql)) {
         $dataPoints[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature, "name" => "Temperature");
         $dataPointsh[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity, "name" => "Humidity");
 
-        $dataPoints2[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature2, "name" => "Temperature2");
-        $dataPoints2h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity2, "name" => "Humidity2");
-        $dataPoints5[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature2, "name" => "Temperature3");
-        $dataPoints5h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity2, "name" => "Humidity3");
+        $dataPoints2[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature1, "name" => "Temperature1");
+        $dataPoints2h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity1, "name" => "Humidity1");
+        $dataPoints5[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_temperature2, "name" => "Temperature2");
+        $dataPoints5h[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_humidity2, "name" => "Humidity2");
 
         $dataPoints4[] = array("x" => strtotime($row["reading_time"]) * 1000, "y" => $row_conductivity, "name" => "conductivity");
        

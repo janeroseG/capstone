@@ -14,7 +14,8 @@
     <link href="//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!--/Style-CSS -->
-    <link rel="stylesheet" href="css/styh11s.css" type="text/css" media="all" />
+   
+    <link rel="stylesheet" href="css/styh11.css" type="text/css" media="all" />
 
     
     <!--//Style-CSS -->
