@@ -1,7 +1,9 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
+
 use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
+
+
 
 // Firebase Realtime Database setup
 $factory = (new Factory())
@@ -10,7 +12,6 @@ $factory = (new Factory())
     ->withDatabaseUri('https://agrictu-default-rtdb.firebaseio.com/');
 
 $database = $factory->createDatabase();
-
 
 // MySQL Database connection setup
 $sname = "localhost";

@@ -276,6 +276,7 @@ function isVerificationLinkValid($verificationLink) {
         }
     }
 </script>
+
 <script>
     // Function to add the 'fade-out' class to the alert after 5 seconds
     function fadeOutAlerts() {
@@ -289,6 +290,20 @@ function isVerificationLinkValid($verificationLink) {
 
     // Call the fadeOutAlerts function when the page loads
     document.addEventListener('DOMContentLoaded', fadeOutAlerts);
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+<script>
+  // Initialize Firebase
+  var firebaseConfig = {
+    apiKey: 'AIzaSyDUyM8JhNdkUg9EzFwRV-d0l6xJ6twBvR4',
+    authDomain: 'agrictu.firebaseapp.com',
+    projectId: 'agrictu',
+    /
+  };
+  // Initialize Firebase app
+  firebase.initializeApp(firebaseConfig);
 </script>
 
 </body>
