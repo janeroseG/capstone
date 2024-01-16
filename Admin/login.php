@@ -36,10 +36,10 @@ curl_close($ch);
 
 if ($response !== false) {
     // Data pushed successfully
-    echo json_encode(array('success' => true)); // Sending a success response back
+  //  echo json_encode(array('success' => true)); // Sending a success response back
 } else {
     // Failed to push data
-    echo json_encode(array('success' => false)); // Sending a failure response back
+   // echo json_encode(array('success' => false)); // Sending a failure response back
 }
 
 

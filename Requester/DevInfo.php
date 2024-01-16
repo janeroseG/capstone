@@ -16,7 +16,8 @@ if ($_SESSION['is_login']) {
 <link rel="stylesheet" href="../css/Dev1.css">
 <link rel="stylesheet" href="../css/dash.css">
 <div class="col-sm-9 col-md-10" style="margin-top: 50px; left: 230px;">
-
+<br>
+<br>
 <div class="image-cards-container">
 <div class="image-card">
 <img src="../images/jane.jpg" alt="easy icon" class="bottom-image">
@@ -54,15 +55,15 @@ if ($_SESSION['is_login']) {
 <hr></hr>
 <div class="image-cards-container1">
 <div class="image-card">
-<img src="../images/p1.png" alt="Katlene" class="bottom-image">
+<img src="../images/teo.png" alt="Katlene" class="bottom-image">
   <div class="card-overlay">
   <h2>Project Adviser</h2>
   </div>
 </div>
 <div class="image-card">
-<img src="../images/p1.png" alt="Katlene" class="bottom-image">
+<img src="../images/nuevo.png" alt="Katlene" class="bottom-image">
   <div class="card-overlay">
-  <h2>Project Owner</h2>
+  <h2>Product Owner</h2>
   </div>
 </div>
 </div>
