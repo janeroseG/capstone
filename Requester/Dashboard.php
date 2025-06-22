@@ -48,7 +48,6 @@ if ($resultCount) {
     // Handle query error
     die("Error executing query: " . $conn->error);
 }
-
 // Retrieve data with OFFSET and LIMIT for pagination
 $sqlData = "SELECT id, location, temperature, humidity, temperature1, humidity1, temperature2, tempCelsius, pHvalue, conductivity, reading_time  FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
 
@@ -157,6 +156,7 @@ $conn->close();
     <html>
     <head>
         <meta http-equiv="refresh" content="530">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/dashtable1.css">
         <script src="../Js/dashtab.js"></script>
         <!----===== Iconscout CSS ===== -->
@@ -285,7 +285,7 @@ $conn->close();
     <td>Temperature Right</td>
         <?php
         if (is_numeric($row_temperature)) {
-            $temperatureStatus = ($row_temperature == 0) ? 'Below Normal' : ($row_temperature > 35 ? 'Above Normal' : 'Normal');
+            $temperatureStatus = ($row_temperature == 0) ? 'Below Normal' : ($row_temperature > 35 ? ' Normal' : 'Normal');
             $temperatureClass = ($row_temperature == 0) ? 'below-normal-label' : ($row_temperature > 35 ? 'above-normal-label' : 'normal-label');
         } else {
             // Handle NaN or non-numeric values as "Not Normal"
@@ -392,7 +392,7 @@ if (is_numeric($row_conductivity)) {
         $conductivityStatus = 'Normal';
         $conductivityClass = 'normal-label';
     } elseif ($row_conductivity < 0.04 || $row_conductivity > 1.00) {
-        $conductivityStatus = 'Above Normal';
+        $conductivityStatus = ' Normal';
         $conductivityClass = 'above-normal-label';
     } else {
         $conductivityStatus = 'Normal';
@@ -412,8 +412,6 @@ if (is_numeric($row_conductivity)) {
 </td>
 </tr>
 </table>
-
-
         </div>
     </body>
     </html>

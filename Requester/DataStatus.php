@@ -19,13 +19,13 @@ if ($_SESSION['is_login']) {
     
     <nav class="navbar navbar-dark fixed-top bg-success flex-md-nowrap p-0 ">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="Dashboard.php">
-      <img src="../images/agri (2).png" alt="Logo" style="height: 70px; width: 80px; padding-bottom:1px; margin-left:50px">
+    <img src="../images/logo1.png" alt="Logo" style="height: 70px; width: 80px; padding-bottom:1px; margin-left: 50px">
     </a>
     <form method="post" action="export_csv.php" onsubmit="return validateForm()">
         <div class="input-group width:00px margin-right:10px">
-            <input type="date" name="selected_date" id="selected_date" class="form-control">
-            <div class="input-group-append">
-                <button type="submit" name="export" class="btn btn-primary">Export</button>
+        <input type="date" name="selected_date" id="selected_date" class="form-control">
+        <div class="input-group-append">
+        <button type="submit" name="export" class="btn btn-primary">Export</button>
 </div>
     </div>
 </form>
@@ -137,9 +137,6 @@ if (selectedDate === "") {
     $totalPages = ceil($totalRecords / $recordsPerPage);
 
     $sql = "SELECT id, location, temperature, humidity, temperature1, humidity1,temperature2, tempCelsius,pHvalue,conductivity,reading_time FROM sensordata ORDER BY id DESC LIMIT $offset, $recordsPerPage";
- 
- 
-
 
     echo '<div class="table-container"><table cellspacing="5" cellpadding="5">
       <tr> 
@@ -194,7 +191,6 @@ if (selectedDate === "") {
  </table>
  
 </div> <!-- End User Change Pasword  Form 2nd Column -->
-
 
 <div class="pagination">
     <?php if ($currentPage > 1) : ?>

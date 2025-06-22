@@ -1,5 +1,4 @@
-
-    <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +21,7 @@
   <!-- Top Navbar -->
   <nav class="navbar navbar-dark fixed-top bg-success flex-md-nowrap p-0 ">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0 logo" href="Dashboard.php">
-      <img src="../images/agri (2).png" alt="Logo" style="height: 80px; width: 80px; padding-bottom:1px; margin-left: 50px">
+    <img src="../images/logo1.png" alt="Logo" style="height: 70px; width: 80px; padding-bottom:1px; margin-left: 50px">
     </a>
 </nav>
     <!--  Start Container -->

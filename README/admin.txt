@@ -1,3 +1,21 @@
+Step 1. Open CMD
+write java -version 
+STEP 2. OPEN A FOLDER WHERE YOU WANT TO PUT YOUR CODE. 
+STEP 3 ON THAT FOLDER RIGHT CLICK AND CLICK NEW THEN TEXT DOCUMENT 
+STEP 3. NAMED YOUR TEXTFILE. AFTER CLICK VIEW, THEN SHOW, THEN FILE EXTENSION. 
+NOW YOU SEE YOUR FILE IN .txt
+STEP 4. NOW RENAME THE EXTENSION OF YOUR DOCUMENT TO .java AND SAVE
+STEP 5. TO ADD CONTENT ON YOUR JAVAFILE JUST CLICK OPEN WITH THEN NOTEPAD.. 
+ NOW GO TO THE SAS and REWRITE THE CODE IN GUIDED PRACTICE. 
+STEP 6. NOW LETS GO TO YOUR COMMAND LINE (CMD)
+AND NAVIGATE THE FILE YOU JUST SAVE. 
+ cd Desktop
+mine is "cd CTU\2ND SEM\PROGRAMMING2\JAVAACTIVITIES"
 
-Admin email: janney10getubig@gmail.com
-password: Adm1n-123
+STEP 6 TO CHECK IF YOU ARE IN THE RIGHT DIRECTORY. USE THIS COMMAND. "dir"
+STEP 7. TO COMPILE OUR PROGRAM WE USE JAVA C COMMAND. so that the computer can understand and run your program and it is called bytecode.
+the java compiler is "javac"
+example "javac[space][FILENAME].java
+STEP 8.HELLOSECONDSEM.class. if you see this it means you are good to go, but if you see some error it means you have some error in your code. go back to your editor and rechecked it. 
+STEP 9. You are now ready to run your program. To run your program we have java command. 
+ex: "java HELLOSECONDSEM" (this time you dont need to write.java extension. 

@@ -2,6 +2,9 @@
 session_start(); // Start the session
 
 include 'dbConnection.php'; // Include the database connection
+
+// call the database connection by using include. 
+
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
